@@ -12,8 +12,13 @@ route.post('/', homeController.trataPost);
 
 // Rotas de contato
 route.get('/404', erroController.paginaInicial);
-route.get('/login', loginController.paginaInicial);
-route.get('/register', registerControler.paginaInicial);
+
+route.get('/login/index', loginController.paginaInicial);
+route.post('/login/login', loginController.realizaLogin);
+
+route.get('/register/index', registerControler.paginaInicial);
+route.post('/register/register', registerControler.criarConta);
+
 route.get('/cadastroContato', cadastroContatoController.paginaInicial);
 
 
