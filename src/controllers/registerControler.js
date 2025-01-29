@@ -1,4 +1,4 @@
-const Login = require('../models/loginModel');
+const Login = require('../models/LoginModel');
 
 exports.paginaInicial = (req, res) => {
   res.render('register');
