@@ -1,14 +1,44 @@
 <%- include('includes/head'); %>
+    <%- include('includes/nav'); %>
 
-<section class="container">
-  <h1><%= csrfToken %></h1>
 
-  <form action="/" method="post">
-    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-    <label>Cliente</label>
-    <input type="text" name="cliente">
-    <button>Submit</button>
-  </form>
-</section>
+        <h1 class="titulo">Agenda</h1>
+        <p class="paragrafo">Contatos logo abaixo</p>
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-danger">danger</div>
+            </div>
+        </div>
+        <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Sobrenome</th>
+                <th scope="col">Contato</th>
+                <th scope="col">Opcoes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>  
+                <td>joao pedro</td>
+                <td>mota</td>
+                <td>64993140912</td>
+                <td><a href="">Editar</a> | <a href="">Excluir</a></td>
+            </tr>
+            <tr>  
+                <td>joao pedro</td>
+                <td>mota</td>
+                <td>64993140912</td>
+                <td><a href="">Editar</a> | <a href="">Excluir</a></td>
+            </tr>
+            <tr>  
+                <td>joao pedro</td>
+                <td>mota</td>
+                <td>64993140912</td>
+                <td><a href="">Editar</a> | <a href="">Excluir</a></td>
+            </tr>
+        </tbody>
+        </table>
 
-<%- include('includes/footer'); %>
+
+        <%- include('includes/footer'); %>

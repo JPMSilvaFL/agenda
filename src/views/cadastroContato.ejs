@@ -1,0 +1,22 @@
+<%- include('includes/head'); %>
+    <%- include('includes/nav'); %>
+
+        <div class="login-container">
+            <h1>Cadastro de Contato</h1>
+            <form action="/cadastrarContato" method="POST">
+                <div>
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" placeholder="Nome" required>
+                </div>
+                <div>
+                    <label for="sobrenome">Sobrenome:</label>
+                    <input type="text" id="sobrenome" placeholder="Sobrenome" required>
+                </div>
+                <div>
+                    <label for="numero">Número:</label>
+                    <input type="text" id="numero" placeholder="Numero" required>
+                </div>
+                <button type="submit">Cadastrar</button>
+            </form>
+        </div>
+        <%- include('includes/footer'); %>
