@@ -1,24 +1,24 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .headerContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.userTray{
-    display: flex;
-    margin-left: auto;
-    padding-right: 1rem;
+.userTray {
+  display: flex;
+  margin-left: auto;
+  padding-right: 1rem;
 }
 
 .mainContainer {
-    display: flex;
-    flex-direction: column;
-    padding: 4rem .7rem 1rem;
+  display: flex;
+  flex-direction: column;
+  padding: 4rem 0.7rem 1rem;
 }

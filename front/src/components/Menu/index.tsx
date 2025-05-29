@@ -1,4 +1,3 @@
 export function Navbar() {
-
-    return "hello world";
+  return "hello world";
 }
