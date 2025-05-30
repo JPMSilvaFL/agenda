@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6eb6cc29-e5d1-4e53-b8d3-be000835970a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.AgendaApi.dir/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.AgendaApi.dir/.idea/discord.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.AgendaApi.dir/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.AgendaApi.dir/.idea/indexLayout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.AgendaApi.dir/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Collections/Repositories/Interfaces/Profiles/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Collections/Repositories/Interfaces/Profiles/IUserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Collections/Repositories/Profiles/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Collections/Repositories/Profiles/UserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Collections/Services/Interfaces/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Collections/Services/Interfaces/IUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Collections/Services/Profiles/TokenService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Collections/Services/Profiles/TokenService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Collections/Services/Profiles/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Collections/Services/Profiles/UserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Collections/ViewModels/Profiles/NewPasswordViewModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/Profiles/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/Profiles/UserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/AgendaDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/AgendaDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Mappings/AccessMap.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Mappings/CustomerMap.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Mappings/EmployeeMap.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Mappings/PersonMap.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Mappings/RoleMap.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Mappings/UserMap.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20250509180932_TablePerson.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20250509180932_TablePerson.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20250514123318_AddTableCustomer.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20250514123318_AddTableCustomer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20250514135018_AddTabbleRole.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20250514135018_AddTabbleRole.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20250514135131_AddTabbleEmployee.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20250514135131_AddTabbleEmployee.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20250514155143_AddTabbleAccess.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20250514155143_AddTabbleAccess.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20250514160041_AddTableUser.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20250514160041_AddTableUser.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20250515195605_AlterCollumnPasswordHash.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20250515195605_AlterCollumnPasswordHash.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/AgendaDbContextModelSnapshot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net9.0/AgendaApi.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net9.0/AgendaApi.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net9.0/AgendaApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net9.0/AgendaApi.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net9.0/AgendaApi.exe" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net9.0/AgendaApi.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net9.0/AgendaApi.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net9.0/AgendaApi.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net9.0/System.Formats.Asn1.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net9.0/System.Text.Json.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/AgendaApi.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/AgendaApi.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/AgendaApi.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/obj/AgendaApi.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.MvcApplicationPartsAssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.MvcApplicationPartsAssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.genruntimeconfig.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.genruntimeconfig.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/AgendaApi.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/apphost.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/ref/AgendaApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/ref/AgendaApi.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/refint/AgendaApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/refint/AgendaApi.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/obj/rider.project.restore.info" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+    <option name="myAllFileTypesSelected" value="false" />
+    <option name="mySelectedFileTypes">
+      <set>
+        <option value="Prisma" />
+      </set>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Data/AgendaDbContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Data/Mappings/Profiles/EmployeeMap.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Data/Mappings/Profiles/PersonMap.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Data/Mappings/Profiles/RoleMap.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Data/Mappings/Schedule/AvailableMap.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Models/Schedule/Available.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2xnGZP5XkuhXismYXcC5BVQ7ooJ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/joaop/agenda/back",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6eb6cc29-e5d1-4e53-b8d3-be000835970a" name="Changes" comment="" />
+      <created>1748566478262</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1748566478262</updated>
+      <workItem from="1748566479903" duration="649000" />
+      <workItem from="1748567259698" duration="112000" />
+      <workItem from="1748567391822" duration="178000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.OperationCanceledException" breakIfHandledByOtherCode="false" displayValue="System.OperationCanceledException" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.Threading.Tasks.TaskCanceledException" breakIfHandledByOtherCode="false" displayValue="System.Threading.Tasks.TaskCanceledException" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

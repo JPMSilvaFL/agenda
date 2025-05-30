@@ -2,11 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace AgendaApi.Data.Mappings;
+namespace AgendaApi.Data.Mappings.Profiles;
 
-public class AccessMap : IEntityTypeConfiguration<Access> {
-	public void Configure(EntityTypeBuilder<Access> builder) {
-		builder.ToTable("Access");
+public class RoleMap : IEntityTypeConfiguration<Role> {
+	public void Configure(EntityTypeBuilder<Role> builder) {
+		builder.ToTable("Role");
 
 		builder.HasKey(x => x.Id);
 		builder.Property(x => x.Id)
@@ -21,6 +21,12 @@ public class AccessMap : IEntityTypeConfiguration<Access> {
 			.IsRequired();
 		builder.HasIndex(x => x.Name)
 			.IsUnique();
+		
+		builder.Property(x=>x.Description)
+			.HasColumnName("Description")
+			.HasColumnType("nvarchar")
+			.HasMaxLength(100)
+			.IsRequired();
 
 		builder.Property(x => x.CreatedAt)
 			.HasColumnName("CreatedAt")

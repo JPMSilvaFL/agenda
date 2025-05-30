@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace AgendaApi.Data.Mappings;
+namespace AgendaApi.Data.Mappings.Profiles;
 
 public class PersonMap : IEntityTypeConfiguration<Person> {
 	public void Configure(EntityTypeBuilder<Person> builder) {

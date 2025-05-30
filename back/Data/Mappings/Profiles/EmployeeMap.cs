@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace AgendaApi.Data.Mappings;
+namespace AgendaApi.Data.Mappings.Profiles;
 
 public class EmployeeMap : IEntityTypeConfiguration<Employee>{
 	public void Configure(EntityTypeBuilder<Employee> builder) {
@@ -15,7 +15,7 @@ public class EmployeeMap : IEntityTypeConfiguration<Employee>{
 			.IsRequired();
 
 		builder.Property(x => x.IdRole)
-			.HasColumnName("IdRole")
+			.HasColumnName("Role")
 			.HasColumnType("uniqueidentifier")
 			.IsRequired();
 		builder.HasOne(x=>x.FromRole)
@@ -25,7 +25,7 @@ public class EmployeeMap : IEntityTypeConfiguration<Employee>{
 			.OnDelete(DeleteBehavior.Restrict);
 
 		builder.Property(x => x.IdPerson)
-			.HasColumnName("IdPerson")
+			.HasColumnName("Person")
 			.HasColumnType("uniqueidentifier")
 			.IsRequired();
 		builder.HasIndex(x=> x.IdPerson)

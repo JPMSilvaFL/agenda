@@ -1,5 +1,7 @@
-﻿using AgendaApi.Data.Mappings;
+﻿using AgendaApi.Data.Mappings.Profiles;
+using AgendaApi.Data.Mappings.Schedule;
 using AgendaApi.Models.Profiles;
+using AgendaApi.Models.Schedule;
 using Microsoft.EntityFrameworkCore;
 
 namespace AgendaApi.Data;
@@ -15,6 +17,8 @@ public class AgendaDbContext : DbContext{
 	public DbSet<Access> Accesses { get; set; }
 	public DbSet<User> Users { get; set; }
 
+	public DbSet<Available> Availables { get; set; }
+
 	protected override void OnModelCreating(ModelBuilder modelBuilder) {
 		modelBuilder.ApplyConfiguration(new PersonMap());
 		modelBuilder.ApplyConfiguration(new CustomerMap());
@@ -22,5 +26,6 @@ public class AgendaDbContext : DbContext{
 		modelBuilder.ApplyConfiguration(new EmployeeMap());
 		modelBuilder.ApplyConfiguration(new AccessMap());
 		modelBuilder.ApplyConfiguration(new UserMap());
+		modelBuilder.ApplyConfiguration(new AvailableMap());
 	}
 }

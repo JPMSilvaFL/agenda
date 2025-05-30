@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace AgendaApi.Data.Mappings;
+namespace AgendaApi.Data.Mappings.Profiles;
 
 public class UserMap : IEntityTypeConfiguration<User>{
 	public void Configure(EntityTypeBuilder<User> builder) {
@@ -29,7 +29,7 @@ public class UserMap : IEntityTypeConfiguration<User>{
 			.IsRequired();
 
 		builder.Property(x=>x.IdPerson)
-			.HasColumnName("IdPerson")
+			.HasColumnName("Person")
 			.HasColumnType("uniqueidentifier")
 			.IsRequired();
 		builder.HasIndex(x => x.IdPerson)
@@ -41,7 +41,7 @@ public class UserMap : IEntityTypeConfiguration<User>{
 			.OnDelete(DeleteBehavior.Cascade);
 
 		builder.Property(x => x.IdAccess)
-			.HasColumnName("IdAccess")
+			.HasColumnName("Access")
 			.HasColumnType("uniqueidentifier")
 			.IsRequired();
 		builder.HasOne(x => x.FromAccess)

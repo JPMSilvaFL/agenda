@@ -22,7 +22,6 @@ public class TokenService : ITokenService{
 			.Users
 			.AsNoTracking()
 			.Include(x => x.FromAccess)
-			.Include(x => x.FromPerson)
 			.FirstOrDefaultAsync();
 
 		if(userDb == null) return new ResultViewModel<JwtViewModel>("Error in pushing user from database");
@@ -36,8 +35,7 @@ public class TokenService : ITokenService{
 				new Claim(ClaimTypes.Name, user.Username),
 				new Claim("PessoaId", user.IdPerson.ToString()),
 				new Claim("PerfilAcessoId", user.IdAccess.ToString()),
-				new Claim(ClaimTypes.Role, userDb.FromAccess!.Name),
-				new Claim(ClaimTypes.Email, userDb.FromPerson!.Email)
+				new Claim(ClaimTypes.Role, userDb.FromAccess!.Name)
 			]),
 			Expires = DateTime.UtcNow.AddHours(6),
 			SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)

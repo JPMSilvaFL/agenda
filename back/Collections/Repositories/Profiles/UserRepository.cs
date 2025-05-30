@@ -20,17 +20,4 @@ public class UserRepository : Repository<User>, IUserRepository{
 			.FirstOrDefaultAsync(x => x.Username == username);
 		return user;
 	}
-
-	public async Task<bool> ValidUserByUsername(string username) {
-		return await _context.Users.AnyAsync(x => x.Username == username);
-	}
-
-	public async Task<bool> UpdatePassword(string username, string password) {
-		var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
-		if (user == null) return false;
-		user.PasswordHash = password;
-		Update(user);
-		await SaveChangesAsync();
-		return true;
-	}
 }

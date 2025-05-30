@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace AgendaApi.Data.Mappings;
+namespace AgendaApi.Data.Mappings.Profiles;
 
 public class CustomerMap : IEntityTypeConfiguration<Customer>{
 	public void Configure(EntityTypeBuilder<Customer> builder) {
@@ -15,7 +15,7 @@ public class CustomerMap : IEntityTypeConfiguration<Customer>{
 			.IsRequired();
 
 		builder.Property(x => x.IdPerson)
-			.HasColumnName("IdPerson")
+			.HasColumnName("Person")
 			.HasColumnType("uniqueidentifier")
 			.IsRequired();
 		builder.HasIndex(x=> x.IdPerson)

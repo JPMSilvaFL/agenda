@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgendaApi.Migrations
 {
     [DbContext(typeof(AgendaDbContext))]
-    [Migration("20250514135131_AddTabbleEmployee")]
-    partial class AddTabbleEmployee
+    [Migration("20250530012953_AddDatabase")]
+    partial class AddDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,31 @@ namespace AgendaApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("AgendaApi.Models.Profiles.Access", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime")
+                        .HasColumnName("CreatedAt");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Access", (string)null);
+                });
 
             modelBuilder.Entity("AgendaApi.Models.Profiles.Customer", b =>
                 {
@@ -38,7 +63,7 @@ namespace AgendaApi.Migrations
 
                     b.Property<Guid>("IdPerson")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("IdPerson");
+                        .HasColumnName("Person");
 
                     b.HasKey("Id");
 
@@ -61,11 +86,11 @@ namespace AgendaApi.Migrations
 
                     b.Property<Guid>("IdPerson")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("IdPerson");
+                        .HasColumnName("Person");
 
                     b.Property<Guid>("IdRole")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("IdRole");
+                        .HasColumnName("Role");
 
                     b.HasKey("Id");
 
@@ -176,6 +201,96 @@ namespace AgendaApi.Migrations
                     b.ToTable("Role", (string)null);
                 });
 
+            modelBuilder.Entity("AgendaApi.Models.Profiles.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime")
+                        .HasColumnName("CreatedAt");
+
+                    b.Property<Guid>("IdAccess")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Access");
+
+                    b.Property<Guid>("IdPerson")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Person");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("PasswordHash");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("Username");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdAccess");
+
+                    b.HasIndex("IdPerson")
+                        .IsUnique();
+
+                    b.HasIndex("Username")
+                        .IsUnique();
+
+                    b.ToTable("User", (string)null);
+                });
+
+            modelBuilder.Entity("AgendaApi.Models.Schedule.Available", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime")
+                        .HasColumnName("CreatedAt");
+
+                    b.Property<DateTime>("FinalTime")
+                        .HasColumnType("datetime")
+                        .HasColumnName("FinalTime");
+
+                    b.Property<Guid>("IdEmployee")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Employee");
+
+                    b.Property<DateTime>("InitialTime")
+                        .HasColumnType("datetime")
+                        .HasColumnName("InitialTime");
+
+                    b.Property<bool>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true)
+                        .HasColumnName("Status");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime")
+                        .HasColumnName("UpdatedAt");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FinalTime")
+                        .IsUnique();
+
+                    b.HasIndex("IdEmployee");
+
+                    b.HasIndex("InitialTime")
+                        .IsUnique();
+
+                    b.ToTable("Available", (string)null);
+                });
+
             modelBuilder.Entity("AgendaApi.Models.Profiles.Customer", b =>
                 {
                     b.HasOne("AgendaApi.Models.Profiles.Person", "FromPerson")
@@ -207,6 +322,39 @@ namespace AgendaApi.Migrations
                     b.Navigation("FromPerson");
 
                     b.Navigation("FromRole");
+                });
+
+            modelBuilder.Entity("AgendaApi.Models.Profiles.User", b =>
+                {
+                    b.HasOne("AgendaApi.Models.Profiles.Access", "FromAccess")
+                        .WithMany()
+                        .HasForeignKey("IdAccess")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("FK_User_Access");
+
+                    b.HasOne("AgendaApi.Models.Profiles.Person", "FromPerson")
+                        .WithOne()
+                        .HasForeignKey("AgendaApi.Models.Profiles.User", "IdPerson")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_User_Person");
+
+                    b.Navigation("FromAccess");
+
+                    b.Navigation("FromPerson");
+                });
+
+            modelBuilder.Entity("AgendaApi.Models.Schedule.Available", b =>
+                {
+                    b.HasOne("AgendaApi.Models.Profiles.Person", "FromEmployee")
+                        .WithMany()
+                        .HasForeignKey("IdEmployee")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("FK_Available_Employee");
+
+                    b.Navigation("FromEmployee");
                 });
 #pragma warning restore 612, 618
         }

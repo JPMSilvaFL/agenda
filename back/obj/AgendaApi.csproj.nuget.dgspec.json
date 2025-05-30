@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\supor\\jp_estudo\\c-sharp\\AgendaApi\\AgendaApi.csproj": {}
+    "C:\\Users\\joaop\\agenda\\back\\AgendaApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\supor\\jp_estudo\\c-sharp\\AgendaApi\\AgendaApi.csproj": {
+    "C:\\Users\\joaop\\agenda\\back\\AgendaApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\supor\\jp_estudo\\c-sharp\\AgendaApi\\AgendaApi.csproj",
+        "projectUniqueName": "C:\\Users\\joaop\\agenda\\back\\AgendaApi.csproj",
         "projectName": "AgendaApi",
-        "projectPath": "C:\\Users\\supor\\jp_estudo\\c-sharp\\AgendaApi\\AgendaApi.csproj",
-        "packagesPath": "C:\\Users\\supor\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\supor\\jp_estudo\\c-sharp\\AgendaApi\\obj\\",
+        "projectPath": "C:\\Users\\joaop\\agenda\\back\\AgendaApi.csproj",
+        "packagesPath": "C:\\Users\\joaop\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\joaop\\agenda\\back\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\supor\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\joaop\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -94,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

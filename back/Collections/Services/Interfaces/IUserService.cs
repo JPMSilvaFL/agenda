@@ -8,6 +8,4 @@ public interface IUserService{
 	Task<User> HandleCreateUser(UserViewModel model);
 	bool HandleAuthenticateUser(LoginViewModel model);
 	Task<User> HandleGetUser(string username);
-	Task<bool> HandleValidUsername(NewPasswordViewModel model);
-	Task<bool> HandleUpdatePassword(string username, string password);
 }
