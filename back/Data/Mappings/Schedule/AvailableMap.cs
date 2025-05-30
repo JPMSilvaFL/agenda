@@ -14,6 +14,15 @@ public class AvailableMap : IEntityTypeConfiguration<Available> {
 			.HasColumnType("uniqueidentifier")
 			.IsRequired();
 
+		builder.Property(x => x.IdScheduled)
+			.HasColumnName("Scheduled")
+			.HasColumnType("uniqueidentifier");
+		builder.HasOne(x=>x.FromScheduled)
+			.WithMany()
+			.HasForeignKey(x=>x.IdScheduled)
+			.HasConstraintName("FK_Available_Scheduled")
+			.OnDelete(DeleteBehavior.ClientSetNull);
+
 		builder.Property(x=> x.IdEmployee)
 			.HasColumnName("Employee")
 			.HasColumnType("uniqueidentifier")

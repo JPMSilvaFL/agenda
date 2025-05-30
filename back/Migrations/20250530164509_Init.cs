@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AgendaApi.Migrations
 {
     /// <inheritdoc />
-    public partial class AddDatabase : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -59,28 +59,6 @@ namespace AgendaApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Available",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Employee = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    InitialTime = table.Column<DateTime>(type: "datetime", nullable: false),
-                    FinalTime = table.Column<DateTime>(type: "datetime", nullable: false),
-                    Status = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Available", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Available_Employee",
-                        column: x => x.Employee,
-                        principalTable: "Person",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Customer",
                 columns: table => new
                 {
@@ -97,6 +75,25 @@ namespace AgendaApi.Migrations
                         principalTable: "Person",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Secretary",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Employee = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Secretary", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Secretary_FromEmployee",
+                        column: x => x.Employee,
+                        principalTable: "Person",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -153,6 +150,91 @@ namespace AgendaApi.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Purpose",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Role = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    Value = table.Column<double>(type: "float", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Purpose", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Purpose_FromRole",
+                        column: x => x.Role,
+                        principalTable: "Role",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Scheduled",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Customer = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Secretary = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdPurpose = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FromPurposeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Status = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Scheduled", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Scheduled_Customer",
+                        column: x => x.Customer,
+                        principalTable: "Customer",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Scheduled_Purpose_FromPurposeId",
+                        column: x => x.FromPurposeId,
+                        principalTable: "Purpose",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Scheduled_Secretary",
+                        column: x => x.Secretary,
+                        principalTable: "Secretary",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Available",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Scheduled = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Employee = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    InitialTime = table.Column<DateTime>(type: "datetime", nullable: false),
+                    FinalTime = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Available", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Available_Employee",
+                        column: x => x.Employee,
+                        principalTable: "Person",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Available_Scheduled",
+                        column: x => x.Scheduled,
+                        principalTable: "Scheduled",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Access_Name",
                 table: "Access",
@@ -175,6 +257,11 @@ namespace AgendaApi.Migrations
                 table: "Available",
                 column: "InitialTime",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Available_Scheduled",
+                table: "Available",
+                column: "Scheduled");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customer_Person",
@@ -206,9 +293,41 @@ namespace AgendaApi.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Purpose_Name",
+                table: "Purpose",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Purpose_Role",
+                table: "Purpose",
+                column: "Role");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Role_Name",
                 table: "Role",
                 column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Scheduled_Customer",
+                table: "Scheduled",
+                column: "Customer");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Scheduled_FromPurposeId",
+                table: "Scheduled",
+                column: "FromPurposeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Scheduled_Secretary",
+                table: "Scheduled",
+                column: "Secretary");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Secretary_Employee",
+                table: "Secretary",
+                column: "Employee",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -236,19 +355,28 @@ namespace AgendaApi.Migrations
                 name: "Available");
 
             migrationBuilder.DropTable(
-                name: "Customer");
-
-            migrationBuilder.DropTable(
                 name: "Employee");
 
             migrationBuilder.DropTable(
                 name: "User");
 
             migrationBuilder.DropTable(
-                name: "Role");
+                name: "Scheduled");
 
             migrationBuilder.DropTable(
                 name: "Access");
+
+            migrationBuilder.DropTable(
+                name: "Customer");
+
+            migrationBuilder.DropTable(
+                name: "Purpose");
+
+            migrationBuilder.DropTable(
+                name: "Secretary");
+
+            migrationBuilder.DropTable(
+                name: "Role");
 
             migrationBuilder.DropTable(
                 name: "Person");

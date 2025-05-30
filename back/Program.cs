@@ -4,7 +4,9 @@ using AgendaApi;
 using AgendaApi.Collections.Repositories;
 using AgendaApi.Collections.Repositories.Interfaces;
 using AgendaApi.Collections.Repositories.Interfaces.Profiles;
+using AgendaApi.Collections.Repositories.Interfaces.Schedule;
 using AgendaApi.Collections.Repositories.Profiles;
+using AgendaApi.Collections.Repositories.Schedule;
 using AgendaApi.Collections.Services.Interfaces;
 using AgendaApi.Collections.Services.Interfaces.Utilities;
 using AgendaApi.Collections.Services.Profiles;
@@ -70,10 +72,14 @@ void ConfigureServices(WebApplicationBuilder builder) {
 
 
 	builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+	builder.Services.AddTransient<IAvailableRepository, AvailableRepository>();
 	builder.Services.AddTransient<IUserRepository, UserRepository>();
 	builder.Services.AddTransient<IPersonRepository, PersonRepository>();
 	builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
 	builder.Services.AddTransient<IAccessRepository, AccessRepository>();
+	builder.Services.AddTransient<ISecretaryRepository, SecretaryRepository>();
+	builder.Services.AddTransient<IPurposeRepository, PurposeRepository>();
+	builder.Services.AddTransient<IScheduledRepository, ScheduledRepository>();
 }
 
 void ConfigureAuthentication(WebApplicationBuilder builder) {

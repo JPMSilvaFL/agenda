@@ -4,6 +4,7 @@ using AgendaApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgendaApi.Migrations
 {
     [DbContext(typeof(AgendaDbContext))]
-    partial class AgendaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250530164509_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -377,13 +380,15 @@ namespace AgendaApi.Migrations
                         .HasColumnType("datetime")
                         .HasColumnName("CreatedAt");
 
+                    b.Property<Guid?>("FromPurposeId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("IdCustomer")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("Customer");
 
                     b.Property<Guid>("IdPurpose")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("Purpose");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("IdSecretary")
                         .HasColumnType("uniqueidentifier")
@@ -401,9 +406,9 @@ namespace AgendaApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdCustomer");
+                    b.HasIndex("FromPurposeId");
 
-                    b.HasIndex("IdPurpose");
+                    b.HasIndex("IdCustomer");
 
                     b.HasIndex("IdSecretary");
 
@@ -509,19 +514,16 @@ namespace AgendaApi.Migrations
 
             modelBuilder.Entity("AgendaApi.Models.Schedule.Scheduled", b =>
                 {
+                    b.HasOne("AgendaApi.Models.Schedule.Purpose", "FromPurpose")
+                        .WithMany()
+                        .HasForeignKey("FromPurposeId");
+
                     b.HasOne("AgendaApi.Models.Profiles.Customer", "FromCustomer")
                         .WithMany()
                         .HasForeignKey("IdCustomer")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Scheduled_Customer");
-
-                    b.HasOne("AgendaApi.Models.Schedule.Purpose", "FromPurpose")
-                        .WithMany()
-                        .HasForeignKey("IdPurpose")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired()
-                        .HasConstraintName("FK_Scheduled_Purpose");
 
                     b.HasOne("AgendaApi.Models.Profiles.Secretary", "FromSecretary")
                         .WithMany()

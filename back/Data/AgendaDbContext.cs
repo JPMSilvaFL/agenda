@@ -15,9 +15,12 @@ public class AgendaDbContext : DbContext{
 	public DbSet<Role> Roles { get; set; }
 	public DbSet<Employee> Employees { get; set; }
 	public DbSet<Access> Accesses { get; set; }
+	public DbSet<Secretary> Secretaries { get; set; }
 	public DbSet<User> Users { get; set; }
 
 	public DbSet<Available> Availables { get; set; }
+	public DbSet<Purpose> Purposes { get; set; }
+	public DbSet<Scheduled> Scheduleds { get; set; }
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder) {
 		modelBuilder.ApplyConfiguration(new PersonMap());
@@ -27,5 +30,8 @@ public class AgendaDbContext : DbContext{
 		modelBuilder.ApplyConfiguration(new AccessMap());
 		modelBuilder.ApplyConfiguration(new UserMap());
 		modelBuilder.ApplyConfiguration(new AvailableMap());
+		modelBuilder.ApplyConfiguration(new SecretaryMap());
+		modelBuilder.ApplyConfiguration(new PurposeMap());
+		modelBuilder.ApplyConfiguration(new ScheduledMap());
 	}
 }

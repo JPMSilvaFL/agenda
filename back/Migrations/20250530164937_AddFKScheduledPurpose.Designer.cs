@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgendaApi.Migrations
 {
     [DbContext(typeof(AgendaDbContext))]
-    [Migration("20250530012953_AddDatabase")]
-    partial class AddDatabase
+    [Migration("20250530164937_AddFKScheduledPurpose")]
+    partial class AddFKScheduledPurpose
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -201,6 +201,33 @@ namespace AgendaApi.Migrations
                     b.ToTable("Role", (string)null);
                 });
 
+            modelBuilder.Entity("AgendaApi.Models.Profiles.Secretary", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime")
+                        .HasColumnName("CreatedAt");
+
+                    b.Property<Guid>("IdEmployee")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Employee");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime")
+                        .HasColumnName("UpdatedAt");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdEmployee")
+                        .IsUnique();
+
+                    b.ToTable("Secretary", (string)null);
+                });
+
             modelBuilder.Entity("AgendaApi.Models.Profiles.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -264,6 +291,10 @@ namespace AgendaApi.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("Employee");
 
+                    b.Property<Guid?>("IdScheduled")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Scheduled");
+
                     b.Property<DateTime>("InitialTime")
                         .HasColumnType("datetime")
                         .HasColumnName("InitialTime");
@@ -285,10 +316,101 @@ namespace AgendaApi.Migrations
 
                     b.HasIndex("IdEmployee");
 
+                    b.HasIndex("IdScheduled");
+
                     b.HasIndex("InitialTime")
                         .IsUnique();
 
                     b.ToTable("Available", (string)null);
+                });
+
+            modelBuilder.Entity("AgendaApi.Models.Schedule.Purpose", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime")
+                        .HasColumnName("CreatedAt");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("Description");
+
+                    b.Property<Guid>("IdRole")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Role");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("Name");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime")
+                        .HasColumnName("UpdatedAt");
+
+                    b.Property<double>("Value")
+                        .HasColumnType("float")
+                        .HasColumnName("Value");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdRole");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Purpose", (string)null);
+                });
+
+            modelBuilder.Entity("AgendaApi.Models.Schedule.Scheduled", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime")
+                        .HasColumnName("CreatedAt");
+
+                    b.Property<Guid>("IdCustomer")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Customer");
+
+                    b.Property<Guid>("IdPurpose")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Purpose");
+
+                    b.Property<Guid>("IdSecretary")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Secretary");
+
+                    b.Property<bool>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true)
+                        .HasColumnName("Status");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime")
+                        .HasColumnName("UpdatedAt");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdCustomer");
+
+                    b.HasIndex("IdPurpose");
+
+                    b.HasIndex("IdSecretary");
+
+                    b.ToTable("Scheduled", (string)null);
                 });
 
             modelBuilder.Entity("AgendaApi.Models.Profiles.Customer", b =>
@@ -324,6 +446,18 @@ namespace AgendaApi.Migrations
                     b.Navigation("FromRole");
                 });
 
+            modelBuilder.Entity("AgendaApi.Models.Profiles.Secretary", b =>
+                {
+                    b.HasOne("AgendaApi.Models.Profiles.Person", "FromEmployee")
+                        .WithOne()
+                        .HasForeignKey("AgendaApi.Models.Profiles.Secretary", "IdEmployee")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("FK_Secretary_FromEmployee");
+
+                    b.Navigation("FromEmployee");
+                });
+
             modelBuilder.Entity("AgendaApi.Models.Profiles.User", b =>
                 {
                     b.HasOne("AgendaApi.Models.Profiles.Access", "FromAccess")
@@ -354,7 +488,56 @@ namespace AgendaApi.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_Available_Employee");
 
+                    b.HasOne("AgendaApi.Models.Schedule.Scheduled", "FromScheduled")
+                        .WithMany()
+                        .HasForeignKey("IdScheduled")
+                        .HasConstraintName("FK_Available_Scheduled");
+
                     b.Navigation("FromEmployee");
+
+                    b.Navigation("FromScheduled");
+                });
+
+            modelBuilder.Entity("AgendaApi.Models.Schedule.Purpose", b =>
+                {
+                    b.HasOne("AgendaApi.Models.Profiles.Role", "FromRole")
+                        .WithMany()
+                        .HasForeignKey("IdRole")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Purpose_FromRole");
+
+                    b.Navigation("FromRole");
+                });
+
+            modelBuilder.Entity("AgendaApi.Models.Schedule.Scheduled", b =>
+                {
+                    b.HasOne("AgendaApi.Models.Profiles.Customer", "FromCustomer")
+                        .WithMany()
+                        .HasForeignKey("IdCustomer")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Scheduled_Customer");
+
+                    b.HasOne("AgendaApi.Models.Schedule.Purpose", "FromPurpose")
+                        .WithMany()
+                        .HasForeignKey("IdPurpose")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("FK_Scheduled_Purpose");
+
+                    b.HasOne("AgendaApi.Models.Profiles.Secretary", "FromSecretary")
+                        .WithMany()
+                        .HasForeignKey("IdSecretary")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("FK_Scheduled_Secretary");
+
+                    b.Navigation("FromCustomer");
+
+                    b.Navigation("FromPurpose");
+
+                    b.Navigation("FromSecretary");
                 });
 #pragma warning restore 612, 618
         }

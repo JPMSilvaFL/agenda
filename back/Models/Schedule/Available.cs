@@ -4,6 +4,10 @@ namespace AgendaApi.Models.Schedule;
 
 public class Available {
 	public Guid Id { get; set; }
+
+	public Guid? IdScheduled { get; set; }
+	public Scheduled? FromScheduled { get; set; }
+
 	public Guid IdEmployee { get; set; }
 	public Person? FromEmployee { get; set; }
 	public DateTime InitialTime { get; set; }

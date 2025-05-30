@@ -15,6 +15,15 @@ public class PersonController : ControllerBase {
 		_personService = personService;
 	}
 
+	[HttpPost("api/v1/fakeperson")]
+	public async Task<IActionResult> FakeCreatePerson([FromBody] PersonVWTest model) {
+		foreach (var person in model.People) {
+			var result = await _personService.HandleCreatePerson(person);
+		}
+
+		return Ok(new ResultViewModel<PersonVWTest>(model));
+	}
+
 	[HttpPost("api/v1/persons/")]
 	public async Task<IActionResult> CreatePerson([FromBody]PersonViewModel model) {
 		if(!ModelState.IsValid)
