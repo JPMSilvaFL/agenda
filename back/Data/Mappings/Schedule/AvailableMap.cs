@@ -49,8 +49,9 @@ public class AvailableMap : IEntityTypeConfiguration<Available> {
 
 		builder.Property(x=> x.Status)
 			.HasColumnName("Status")
-			.HasColumnType("bit")
-			.HasDefaultValue(1)
+			.HasColumnType("char")
+			.HasDefaultValue('A')
+			.HasMaxLength(1)
 			.IsRequired();
 
 		builder.Property(x=> x.CreatedAt)

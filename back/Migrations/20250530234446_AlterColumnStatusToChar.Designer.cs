@@ -4,6 +4,7 @@ using AgendaApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgendaApi.Migrations
 {
     [DbContext(typeof(AgendaDbContext))]
-    partial class AgendaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250530234446_AlterColumnStatusToChar")]
+    partial class AlterColumnStatusToChar
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -480,7 +483,7 @@ namespace AgendaApi.Migrations
 
             modelBuilder.Entity("AgendaApi.Models.Schedule.Available", b =>
                 {
-                    b.HasOne("AgendaApi.Models.Profiles.Employee", "FromEmployee")
+                    b.HasOne("AgendaApi.Models.Profiles.Person", "FromEmployee")
                         .WithMany()
                         .HasForeignKey("IdEmployee")
                         .OnDelete(DeleteBehavior.NoAction)

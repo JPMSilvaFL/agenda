@@ -1,6 +1,7 @@
 ﻿using AgendaApi.Collections.Repositories.Interfaces;
 using AgendaApi.Collections.Repositories.Interfaces.Profiles;
 using AgendaApi.Collections.Services.Interfaces;
+using AgendaApi.Collections.Services.Interfaces.Profiles;
 using AgendaApi.Collections.ViewModels.Profiles;
 using AgendaApi.Models.Profiles;
 

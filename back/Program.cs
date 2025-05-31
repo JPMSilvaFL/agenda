@@ -8,8 +8,11 @@ using AgendaApi.Collections.Repositories.Interfaces.Schedule;
 using AgendaApi.Collections.Repositories.Profiles;
 using AgendaApi.Collections.Repositories.Schedule;
 using AgendaApi.Collections.Services.Interfaces;
+using AgendaApi.Collections.Services.Interfaces.Profiles;
+using AgendaApi.Collections.Services.Interfaces.Schedule;
 using AgendaApi.Collections.Services.Interfaces.Utilities;
 using AgendaApi.Collections.Services.Profiles;
+using AgendaApi.Collections.Services.Schedule;
 using AgendaApi.Collections.Services.Utilities;
 using AgendaApi.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -69,6 +72,7 @@ void ConfigureServices(WebApplicationBuilder builder) {
 	builder.Services.AddTransient<IAccessService, AccessService>();
 	builder.Services.AddTransient<ITokenService, TokenService>();
 	builder.Services.AddScoped<IPasswordHashService, PasswordHashService>();
+	builder.Services.AddTransient<IAvailableService, AvailableService>();
 
 
 	builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));

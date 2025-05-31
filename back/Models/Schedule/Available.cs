@@ -9,10 +9,10 @@ public class Available {
 	public Scheduled? FromScheduled { get; set; }
 
 	public Guid IdEmployee { get; set; }
-	public Person? FromEmployee { get; set; }
+	public Employee? FromEmployee { get; set; }
 	public DateTime InitialTime { get; set; }
 	public DateTime FinalTime { get; set; }
-	public bool Status { get; set; }
+	public char Status { get; set; }
 	public DateTime CreatedAt { get; set; }
 	public DateTime? UpdatedAt { get; set; }
 
@@ -23,7 +23,7 @@ public class Available {
 		IdEmployee = idEmployee;
 		InitialTime = initialTime;
 		FinalTime = finalTime;
-		Status = true;
+		Status = 'A';
 		CreatedAt = DateTime.UtcNow;
 	}
 }

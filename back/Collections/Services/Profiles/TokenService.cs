@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Text;
 using AgendaApi.Collections.Services.Interfaces;
+using AgendaApi.Collections.Services.Interfaces.Utilities;
 using AgendaApi.Collections.ViewModels.Result;
 using AgendaApi.Data;
 using AgendaApi.Models.Profiles;
