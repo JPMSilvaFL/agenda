@@ -73,6 +73,7 @@ void ConfigureServices(WebApplicationBuilder builder) {
 	builder.Services.AddTransient<ITokenService, TokenService>();
 	builder.Services.AddScoped<IPasswordHashService, PasswordHashService>();
 	builder.Services.AddTransient<IAvailableService, AvailableService>();
+	builder.Services.AddTransient<IPurposeService, PurposeService>();
 
 
 	builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
