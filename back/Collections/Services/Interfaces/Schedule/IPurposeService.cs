@@ -5,5 +5,5 @@ namespace AgendaApi.Collections.Services.Interfaces.Schedule;
 
 public interface IPurposeService {
 	Task<Purpose> HandleCreatePurpose(PurposeViewModel model);
-	Task<List<Purpose>> HandleGetPurpose();
+	Task<List<Purpose>> HandleGetPurpose(SearchPurposeViewModel model);
 }
