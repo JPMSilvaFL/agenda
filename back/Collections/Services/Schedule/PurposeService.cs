@@ -20,6 +20,7 @@ public class PurposeService : IPurposeService{
 	}
 
 	public async Task<List<Purpose>> HandleGetPurpose(SearchPurposeViewModel model) {
-
+		var result = await _purposeRepository.GetPurpose(model.Role, model.Name, model.Skip, model.Take);
+		return result;
 	}
 }
