@@ -16,12 +16,12 @@
           <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.4" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.9.0" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Collections\Attributes\" />
-      <Folder Include="Migrations\" />
     </ItemGroup>
 
 </Project>

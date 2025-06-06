@@ -1,5 +1,7 @@
 ﻿using AgendaApi.Data.Mappings.Profiles;
 using AgendaApi.Data.Mappings.Schedule;
+using AgendaApi.Data.Mappings.Utilities;
+using AgendaApi.Models.Log;
 using AgendaApi.Models.Profiles;
 using AgendaApi.Models.Schedule;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +23,7 @@ public class AgendaDbContext : DbContext{
 	public DbSet<Available> Availables { get; set; }
 	public DbSet<Purpose> Purposes { get; set; }
 	public DbSet<Scheduled> Scheduleds { get; set; }
+	public DbSet<LogActivity> Logs { get; set; }
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder) {
 		modelBuilder.ApplyConfiguration(new PersonMap());
@@ -33,5 +36,18 @@ public class AgendaDbContext : DbContext{
 		modelBuilder.ApplyConfiguration(new SecretaryMap());
 		modelBuilder.ApplyConfiguration(new PurposeMap());
 		modelBuilder.ApplyConfiguration(new ScheduledMap());
+		modelBuilder.ApplyConfiguration(new LogActivityMap());
+
+		modelBuilder.Ignore<LogSuccess>();
+
+		modelBuilder.Entity<LogActivity>()
+			.Property(e => e.Type)
+			.HasConversion<string>();
+		modelBuilder.Entity<LogActivity>()
+			.Property(e => e.Action)
+			.HasConversion<string>();
+		modelBuilder.Entity<LogActivity>()
+			.Property(e => e.Code)
+			.HasConversion<string>();
 	}
 }

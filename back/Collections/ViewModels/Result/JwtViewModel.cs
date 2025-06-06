@@ -1,9 +1,8 @@
 ﻿namespace AgendaApi.Collections.ViewModels.Result;
+public class JwtViewModel{
+	public string Authorization { get; set; }
 
-public class JwtViewModel() {
-	public string JwtKey { get; set; }
-
-	public JwtViewModel(string jwt) : this() {
-		JwtKey = jwt;
+	public JwtViewModel(string authorization) {
+		Authorization = authorization;
 	}
 }

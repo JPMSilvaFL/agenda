@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AgendaApi.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -174,14 +174,37 @@ namespace AgendaApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "LogActivity",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    User = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Type = table.Column<string>(type: "nvarchar", nullable: false),
+                    Action = table.Column<string>(type: "nvarchar", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LogActivity", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_LogActivity_User",
+                        column: x => x.User,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Scheduled",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Customer = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Secretary = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdPurpose = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FromPurposeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Purpose = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: true)
@@ -196,8 +219,8 @@ namespace AgendaApi.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Scheduled_Purpose_FromPurposeId",
-                        column: x => x.FromPurposeId,
+                        name: "FK_Scheduled_Purpose",
+                        column: x => x.Purpose,
                         principalTable: "Purpose",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -216,7 +239,7 @@ namespace AgendaApi.Migrations
                     Employee = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     InitialTime = table.Column<DateTime>(type: "datetime", nullable: false),
                     FinalTime = table.Column<DateTime>(type: "datetime", nullable: false),
-                    Status = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
+                    Status = table.Column<string>(type: "char(1)", maxLength: 1, nullable: false, defaultValue: "A"),
                     CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
@@ -226,7 +249,7 @@ namespace AgendaApi.Migrations
                     table.ForeignKey(
                         name: "FK_Available_Employee",
                         column: x => x.Employee,
-                        principalTable: "Person",
+                        principalTable: "Employee",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Available_Scheduled",
@@ -281,6 +304,11 @@ namespace AgendaApi.Migrations
                 column: "Role");
 
             migrationBuilder.CreateIndex(
+                name: "IX_LogActivity_User",
+                table: "LogActivity",
+                column: "User");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Person_Document",
                 table: "Person",
                 column: "Document",
@@ -315,9 +343,9 @@ namespace AgendaApi.Migrations
                 column: "Customer");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Scheduled_FromPurposeId",
+                name: "IX_Scheduled_Purpose",
                 table: "Scheduled",
-                column: "FromPurposeId");
+                column: "Purpose");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Scheduled_Secretary",
@@ -355,16 +383,16 @@ namespace AgendaApi.Migrations
                 name: "Available");
 
             migrationBuilder.DropTable(
-                name: "Employee");
+                name: "LogActivity");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Employee");
 
             migrationBuilder.DropTable(
                 name: "Scheduled");
 
             migrationBuilder.DropTable(
-                name: "Access");
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "Customer");
@@ -374,6 +402,9 @@ namespace AgendaApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "Secretary");
+
+            migrationBuilder.DropTable(
+                name: "Access");
 
             migrationBuilder.DropTable(
                 name: "Role");

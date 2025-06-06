@@ -22,6 +22,54 @@ namespace AgendaApi.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("AgendaApi.Models.Log.LogActivity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Action")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("Action");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("Code");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime")
+                        .HasColumnName("CreatedAt");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("Description");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("Type");
+
+                    b.Property<Guid>("User")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("User");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("User");
+
+                    b.ToTable("LogActivity", (string)null);
+                });
+
             modelBuilder.Entity("AgendaApi.Models.Profiles.Access", b =>
                 {
                     b.Property<Guid>("Id")
@@ -410,6 +458,18 @@ namespace AgendaApi.Migrations
                     b.HasIndex("IdSecretary");
 
                     b.ToTable("Scheduled", (string)null);
+                });
+
+            modelBuilder.Entity("AgendaApi.Models.Log.LogActivity", b =>
+                {
+                    b.HasOne("AgendaApi.Models.Profiles.User", "FromUser")
+                        .WithMany()
+                        .HasForeignKey("User")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_LogActivity_User");
+
+                    b.Navigation("FromUser");
                 });
 
             modelBuilder.Entity("AgendaApi.Models.Profiles.Customer", b =>

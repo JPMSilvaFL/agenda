@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgendaApi.Migrations
 {
     [DbContext(typeof(AgendaDbContext))]
-    [Migration("20250530164937_AddFKScheduledPurpose")]
-    partial class AddFKScheduledPurpose
+    [Migration("20250606182706_AlterTabbleLogActivityMaxLengthType")]
+    partial class AlterTabbleLogActivityMaxLengthType
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,54 @@ namespace AgendaApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("AgendaApi.Models.Log.LogActivity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Action")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("Action");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("Code");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime")
+                        .HasColumnName("CreatedAt");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("Description");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("Type");
+
+                    b.Property<Guid>("User")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("User");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("User");
+
+                    b.ToTable("LogActivity", (string)null);
+                });
 
             modelBuilder.Entity("AgendaApi.Models.Profiles.Access", b =>
                 {
@@ -299,10 +347,12 @@ namespace AgendaApi.Migrations
                         .HasColumnType("datetime")
                         .HasColumnName("InitialTime");
 
-                    b.Property<bool>("Status")
+                    b.Property<string>("Status")
+                        .IsRequired()
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true)
+                        .HasMaxLength(1)
+                        .HasColumnType("char")
+                        .HasDefaultValue("A")
                         .HasColumnName("Status");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -413,6 +463,18 @@ namespace AgendaApi.Migrations
                     b.ToTable("Scheduled", (string)null);
                 });
 
+            modelBuilder.Entity("AgendaApi.Models.Log.LogActivity", b =>
+                {
+                    b.HasOne("AgendaApi.Models.Profiles.User", "FromUser")
+                        .WithMany()
+                        .HasForeignKey("User")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_LogActivity_User");
+
+                    b.Navigation("FromUser");
+                });
+
             modelBuilder.Entity("AgendaApi.Models.Profiles.Customer", b =>
                 {
                     b.HasOne("AgendaApi.Models.Profiles.Person", "FromPerson")
@@ -481,7 +543,7 @@ namespace AgendaApi.Migrations
 
             modelBuilder.Entity("AgendaApi.Models.Schedule.Available", b =>
                 {
-                    b.HasOne("AgendaApi.Models.Profiles.Person", "FromEmployee")
+                    b.HasOne("AgendaApi.Models.Profiles.Employee", "FromEmployee")
                         .WithMany()
                         .HasForeignKey("IdEmployee")
                         .OnDelete(DeleteBehavior.NoAction)

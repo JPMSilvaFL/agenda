@@ -5,8 +5,10 @@ using AgendaApi.Collections.Repositories;
 using AgendaApi.Collections.Repositories.Interfaces;
 using AgendaApi.Collections.Repositories.Interfaces.Profiles;
 using AgendaApi.Collections.Repositories.Interfaces.Schedule;
+using AgendaApi.Collections.Repositories.Interfaces.Utilities;
 using AgendaApi.Collections.Repositories.Profiles;
 using AgendaApi.Collections.Repositories.Schedule;
+using AgendaApi.Collections.Repositories.Utilities;
 using AgendaApi.Collections.Services.Interfaces;
 using AgendaApi.Collections.Services.Interfaces.Profiles;
 using AgendaApi.Collections.Services.Interfaces.Schedule;
@@ -74,6 +76,7 @@ void ConfigureServices(WebApplicationBuilder builder) {
 	builder.Services.AddScoped<IPasswordHashService, PasswordHashService>();
 	builder.Services.AddTransient<IAvailableService, AvailableService>();
 	builder.Services.AddTransient<IPurposeService, PurposeService>();
+	builder.Services.AddTransient<ILogActivityService, LogActivityService>();
 
 
 	builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
@@ -85,6 +88,8 @@ void ConfigureServices(WebApplicationBuilder builder) {
 	builder.Services.AddTransient<ISecretaryRepository, SecretaryRepository>();
 	builder.Services.AddTransient<IPurposeRepository, PurposeRepository>();
 	builder.Services.AddTransient<IScheduledRepository, ScheduledRepository>();
+	builder.Services.AddTransient<ILogActivityRepository, LogActivityRepository>();
+
 }
 
 void ConfigureAuthentication(WebApplicationBuilder builder) {

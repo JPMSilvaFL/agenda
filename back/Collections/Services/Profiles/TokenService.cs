@@ -34,8 +34,8 @@ public class TokenService : ITokenService{
 		var tokenDescriptor = new SecurityTokenDescriptor {
 			Subject = new ClaimsIdentity([
 				new Claim(ClaimTypes.Name, user.Username),
-				new Claim("PessoaId", user.IdPerson.ToString()),
-				new Claim("PerfilAcessoId", user.IdAccess.ToString()),
+				new Claim("PersonId", user.IdPerson.ToString()),
+				new Claim("AccessId", user.IdAccess.ToString()),
 				new Claim(ClaimTypes.Role, userDb.FromAccess!.Name)
 			]),
 			Expires = DateTime.UtcNow.AddHours(6),
@@ -43,7 +43,6 @@ public class TokenService : ITokenService{
 		};
 		var token = tokenHandler.CreateToken(tokenDescriptor);
 		var tokenGerado = tokenHandler.WriteToken(token);
-		var tokenObj = new JwtViewModel(tokenGerado);
-		return (new ResultViewModel<JwtViewModel>(tokenObj));
+		return (new ResultViewModel<JwtViewModel>(tokenGerado));
 	}
 }
