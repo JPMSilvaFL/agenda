@@ -34,7 +34,7 @@ public class TokenService : ITokenService{
 		var tokenDescriptor = new SecurityTokenDescriptor {
 			Subject = new ClaimsIdentity([
 				new Claim(ClaimTypes.Name, user.Username),
-				new Claim("PersonId", user.IdPerson.ToString()),
+				new Claim("UserId", userDb.Id.ToString()),
 				new Claim("AccessId", user.IdAccess.ToString()),
 				new Claim(ClaimTypes.Role, userDb.FromAccess!.Name)
 			]),

@@ -44,7 +44,12 @@ public class PersonController : ControllerBase {
 			var result = await _personService.HandleCreatePerson(model);
 			var logSuccess = _logActivityService.CreateLogSuccess(ELogCode.CreatePerson, "Person "+result.Id+" created successfully.");
 
-			var userId = Guid.Parse(User.FindFirst("PersonId")!.Value);
+			var userIdClaim = User.FindFirst("UserId");
+			if (userIdClaim == null)
+				return Unauthorized(new ResultViewModel<Person>("UserId claim not found."));
+
+			var userId = Guid.Parse(userIdClaim.Value);
+
 
 			await _logActivityService
 				.CreateLog(userId,

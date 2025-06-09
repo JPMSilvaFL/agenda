@@ -21,7 +21,7 @@ public class UserController : ControllerBase {
 	[HttpGet("api/v1/users/")]
 	public async Task<ActionResult<List<User>>> GetUsers() {
 		var users = await _userService.HandleListUser();
-		return Ok(users);
+		return Ok(new ResultViewModel<IList<User>>(users));
 	}
 	[HttpPost("api/v1/users/")]
 	public async Task<IActionResult> CreateUser([FromBody]UserViewModel model) {
