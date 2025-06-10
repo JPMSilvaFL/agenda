@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace AgendaApi.Collections.Services.Profiles;
 
-public class UserService : IUserService{
+public class UserService : IUserService {
 	private readonly IUserRepository _userRepository;
 	private readonly IAccessRepository _accessRepository;
 	private readonly IPasswordHashService _passwordHashService;
@@ -42,7 +42,7 @@ public class UserService : IUserService{
 	public bool HandleAuthenticateUser(LoginViewModel model) {
 		try {
 			var user = _userRepository.GetUser(model.Username);
-			var verifyPassword = _passwordHashService.VerifyPassword(user.Result.PasswordHash,model.Password, user);
+			var verifyPassword = _passwordHashService.VerifyPassword(user.Result.PasswordHash, model.Password, user);
 			return verifyPassword;
 		}
 		catch {

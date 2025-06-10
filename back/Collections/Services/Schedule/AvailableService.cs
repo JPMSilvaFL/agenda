@@ -11,6 +11,7 @@ public class AvailableService : IAvailableService {
 	public AvailableService(IAvailableRepository availableRepository) {
 		_availableRepository = availableRepository;
 	}
+
 	public async Task<Available> HandleCreateAvailable(AvailableViewModel model) {
 		var available = new Available(model.IdEmployee, model.InitialTime, model.FinalTime);
 		await _availableRepository.AddAsync(available);

@@ -2,6 +2,4 @@
 
 namespace AgendaApi.Collections.Repositories.Interfaces.Utilities;
 
-public interface ILogActivityRepository : IRepository<LogActivity> {
-	
-}
+public interface ILogActivityRepository : IRepository<LogActivity> { }

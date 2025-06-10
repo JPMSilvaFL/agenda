@@ -16,7 +16,7 @@ public class Scheduled {
 
 	public Scheduled() { }
 
-	public Scheduled (Guid idCustomer, Guid idSecretary, Guid idPurpose) {
+	public Scheduled(Guid idCustomer, Guid idSecretary, Guid idPurpose) {
 		Id = Guid.NewGuid();
 		IdCustomer = idCustomer;
 		Status = false;

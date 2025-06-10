@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace AgendaApi.Controllers.Profiles;
 
 public class CustomerController : ControllerBase {
-
 	private readonly ICustomerService _customerService;
 
 	public CustomerController(ICustomerService customerService) {
@@ -16,11 +15,11 @@ public class CustomerController : ControllerBase {
 	}
 
 	[HttpPost("api/v1/customers/")]
-	public async Task<IActionResult> CreateCustomer([FromBody]CustomerViewModel model) {
-		if(!ModelState.IsValid)
+	public async Task<IActionResult> CreateCustomer([FromBody] CustomerViewModel model) {
+		if (!ModelState.IsValid)
 			return BadRequest(new ResultViewModel<Customer>(ModelState.Values
-				.SelectMany(x=>x.Errors)
-				.Select(x=>x.ErrorMessage)
+				.SelectMany(x => x.Errors)
+				.Select(x => x.ErrorMessage)
 				.ToList()));
 
 		var result = await _customerService.HandleCreateCustomer(model);

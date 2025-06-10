@@ -6,8 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AgendaApi.Collections.Repositories.Schedule;
 
-public class PurposeRepository : Repository<Purpose>, IPurposeRepository{
+public class PurposeRepository : Repository<Purpose>, IPurposeRepository {
 	private readonly AgendaDbContext _context;
+
 	public PurposeRepository(AgendaDbContext context) : base(context) {
 		_context = context;
 	}
@@ -28,6 +29,5 @@ public class PurposeRepository : Repository<Purpose>, IPurposeRepository{
 			.Skip(skip)
 			.Take(take)
 			.ToListAsync();
-
 	}
 }

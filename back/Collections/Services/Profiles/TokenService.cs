@@ -11,7 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace AgendaApi.Collections.Services.Profiles;
 
-public class TokenService : ITokenService{
+public class TokenService : ITokenService {
 	private readonly AgendaDbContext _context;
 
 	public TokenService(AgendaDbContext context) {
@@ -25,7 +25,7 @@ public class TokenService : ITokenService{
 			.Include(x => x.FromAccess)
 			.FirstOrDefaultAsync();
 
-		if(userDb == null) return new ResultViewModel<JwtViewModel>("Error in pushing user from database");
+		if (userDb == null) return new ResultViewModel<JwtViewModel>("Error in pushing user from database");
 
 		var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -43,6 +43,6 @@ public class TokenService : ITokenService{
 		};
 		var token = tokenHandler.CreateToken(tokenDescriptor);
 		var tokenGerado = tokenHandler.WriteToken(token);
-		return (new ResultViewModel<JwtViewModel>(tokenGerado));
+		return new ResultViewModel<JwtViewModel>(tokenGerado);
 	}
 }

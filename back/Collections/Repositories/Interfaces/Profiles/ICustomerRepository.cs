@@ -2,6 +2,4 @@
 
 namespace AgendaApi.Collections.Repositories.Interfaces.Profiles;
 
-public interface ICustomerRepository : IRepository<Customer> {
-	
-}
+public interface ICustomerRepository : IRepository<Customer> { }

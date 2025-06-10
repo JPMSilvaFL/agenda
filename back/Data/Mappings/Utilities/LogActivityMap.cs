@@ -18,40 +18,43 @@ public class LogActivityMap : IEntityTypeConfiguration<LogActivity> {
 			.HasColumnName("User")
 			.HasColumnType("uniqueidentifier")
 			.IsRequired();
-		builder.HasOne(x=>x.FromUser)
+		builder.HasOne(x => x.FromUser)
 			.WithMany()
-			.HasForeignKey(x=>x.User)
+			.HasForeignKey(x => x.User)
 			.HasConstraintName("FK_LogActivity_User")
 			.OnDelete(DeleteBehavior.Cascade);
 
-		builder.Property(x=>x.Type)
+		builder.Property(x => x.Type)
 			.HasColumnName("Type")
 			.HasColumnType("nvarchar")
 			.HasMaxLength(100)
 			.IsRequired();
 
-		builder.Property(x=>x.Action)
+		builder.Property(x => x.Action)
 			.HasColumnName("Action")
 			.HasColumnType("nvarchar")
 			.HasMaxLength(100)
 			.IsRequired();
 
-		builder.Property(x=>x.Code)
+		builder.Property(x => x.Code)
 			.HasColumnName("Code")
 			.HasColumnType("nvarchar")
 			.HasMaxLength(100)
 			.IsRequired();
 
-		builder.Property(x=>x.Description)
+		builder.Property(x => x.ObjectId)
+			.HasColumnName("ObjectId")
+			.HasColumnType("uniqueidentifier");
+
+		builder.Property(x => x.Description)
 			.HasColumnName("Description")
 			.HasColumnType("nvarchar")
 			.HasMaxLength(150)
 			.IsRequired();
 
-		builder.Property(x=>x.CreatedAt)
+		builder.Property(x => x.CreatedAt)
 			.HasColumnName("CreatedAt")
 			.HasColumnType("datetime")
 			.IsRequired();
-
 	}
 }

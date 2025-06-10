@@ -6,15 +6,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AgendaApi.Controllers.Schedule;
 
-public class AvailableController: ControllerBase{
-
+public class AvailableController : ControllerBase {
 	private readonly IAvailableService _availableService;
+
 	public AvailableController(IAvailableService service) {
 		_availableService = service;
 	}
 
 	[HttpPost("api/v1/available")]
-	public async Task<IActionResult> CreateAvailable([FromBody]AvailableViewModel model) {
+	public async Task<IActionResult> CreateAvailable([FromBody] AvailableViewModel model) {
 		var result = await _availableService.HandleCreateAvailable(model);
 		return Ok(new ResultViewModel<Available>(result));
 	}

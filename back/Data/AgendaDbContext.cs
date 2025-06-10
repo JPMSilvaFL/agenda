@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AgendaApi.Data;
 
-public class AgendaDbContext : DbContext{
+public class AgendaDbContext : DbContext {
 	public AgendaDbContext(DbContextOptions<AgendaDbContext> options)
-		: base(options)
-	{ }
+		: base(options) { }
+
 	public DbSet<Person> Persons { get; set; }
 	public DbSet<Customer> Customers { get; set; }
 	public DbSet<Role> Roles { get; set; }
@@ -38,7 +38,6 @@ public class AgendaDbContext : DbContext{
 		modelBuilder.ApplyConfiguration(new ScheduledMap());
 		modelBuilder.ApplyConfiguration(new LogActivityMap());
 
-		modelBuilder.Ignore<LogSuccess>();
 
 		modelBuilder.Entity<LogActivity>()
 			.Property(e => e.Type)

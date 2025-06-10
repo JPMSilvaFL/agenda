@@ -14,7 +14,7 @@ public class PersonMap : IEntityTypeConfiguration<Person> {
 			.HasColumnType("uniqueidentifier")
 			.IsRequired();
 
-		builder.Property(x=>x.FullName)
+		builder.Property(x => x.FullName)
 			.HasColumnName("FullName")
 			.HasColumnType("nvarchar")
 			.HasMaxLength(100)
@@ -25,7 +25,7 @@ public class PersonMap : IEntityTypeConfiguration<Person> {
 			.HasColumnType("bit")
 			.HasDefaultValue(1);
 
-		builder.Property(x=> x.Document)
+		builder.Property(x => x.Document)
 			.HasColumnName("Document")
 			.HasColumnType("nvarchar")
 			.HasMaxLength(14)
@@ -33,7 +33,7 @@ public class PersonMap : IEntityTypeConfiguration<Person> {
 		builder.HasIndex(x => x.Document)
 			.IsUnique();
 
-		builder.Property(x=>x.Type)
+		builder.Property(x => x.Type)
 			.HasColumnName("Type")
 			.HasColumnType("nvarchar")
 			.HasMaxLength(1)
@@ -44,22 +44,22 @@ public class PersonMap : IEntityTypeConfiguration<Person> {
 			.HasColumnType("nvarchar")
 			.HasMaxLength(100)
 			.IsRequired();
-		builder.HasIndex(x=> x.Email)
+		builder.HasIndex(x => x.Email)
 			.IsUnique();
 
-		builder.Property(x=>x.Phone)
+		builder.Property(x => x.Phone)
 			.HasColumnName("Phone")
 			.HasColumnType("nvarchar")
 			.HasMaxLength(13)
 			.IsRequired();
 
-		builder.Property(x=>x.Address)
+		builder.Property(x => x.Address)
 			.HasColumnName("Address")
 			.HasColumnType("nvarchar")
 			.HasMaxLength(100)
 			.IsRequired();
 
-		builder.Property(x=> x.CreatedAt)
+		builder.Property(x => x.CreatedAt)
 			.HasColumnName("CreatedAt")
 			.HasColumnType("datetime")
 			.IsRequired();

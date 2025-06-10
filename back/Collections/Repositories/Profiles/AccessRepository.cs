@@ -5,8 +5,5 @@ using AgendaApi.Models.Profiles;
 namespace AgendaApi.Collections.Repositories.Profiles;
 
 public class AccessRepository : Repository<Access>, IAccessRepository {
-	public AccessRepository(AgendaDbContext context) : base(context) {
-		
-	}
-	
+	public AccessRepository(AgendaDbContext context) : base(context) { }
 }

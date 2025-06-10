@@ -10,7 +10,7 @@ public class Secretary {
 	public Secretary() { }
 
 	public Secretary(Guid idEmployee) {
-		Id= Guid.NewGuid();
+		Id = Guid.NewGuid();
 		IdEmployee = idEmployee;
 		CreatedAt = DateTime.UtcNow;
 	}

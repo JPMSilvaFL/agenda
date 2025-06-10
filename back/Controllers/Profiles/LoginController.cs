@@ -8,8 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AgendaApi.Controllers.Profiles;
 
-public class LoginController : ControllerBase{
-
+public class LoginController : ControllerBase {
 	private readonly ITokenService _tokenService;
 	private readonly IUserService _userService;
 
@@ -20,13 +19,14 @@ public class LoginController : ControllerBase{
 	}
 
 	[HttpPost("api/v1/login/")]
-	public async Task<IActionResult> GeraTokenLogin([FromBody]LoginViewModel model) {
+	public async Task<IActionResult> GeraTokenLogin([FromBody] LoginViewModel model) {
 		var verification = _userService.HandleAuthenticateUser(model);
 		if (verification) {
 			var user = await _userService.HandleGetUser(model.Username);
 			var token = await _tokenService.GenerateToken(user);
 			return Ok(token);
 		}
+
 		return BadRequest(new ResultViewModel<User>("Erro ao gerar token"));
 	}
 }

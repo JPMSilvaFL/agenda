@@ -24,12 +24,12 @@ public class SecretaryMap : IEntityTypeConfiguration<Secretary> {
 			.HasConstraintName("FK_Secretary_FromEmployee")
 			.OnDelete(DeleteBehavior.NoAction);
 
-		builder.Property(x=>x.CreatedAt)
+		builder.Property(x => x.CreatedAt)
 			.HasColumnName("CreatedAt")
 			.HasColumnType("datetime")
 			.IsRequired();
 
-		builder.Property(x=>x.UpdatedAt)
+		builder.Property(x => x.UpdatedAt)
 			.HasColumnName("UpdatedAt")
 			.HasColumnType("datetime")
 			.IsRequired();

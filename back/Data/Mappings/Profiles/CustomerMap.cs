@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AgendaApi.Data.Mappings.Profiles;
 
-public class CustomerMap : IEntityTypeConfiguration<Customer>{
+public class CustomerMap : IEntityTypeConfiguration<Customer> {
 	public void Configure(EntityTypeBuilder<Customer> builder) {
 		builder.ToTable("Customer");
 
@@ -18,7 +18,7 @@ public class CustomerMap : IEntityTypeConfiguration<Customer>{
 			.HasColumnName("Person")
 			.HasColumnType("uniqueidentifier")
 			.IsRequired();
-		builder.HasIndex(x=> x.IdPerson)
+		builder.HasIndex(x => x.IdPerson)
 			.IsUnique();
 		builder.HasOne(x => x.FromPerson)
 			.WithOne()
@@ -26,7 +26,7 @@ public class CustomerMap : IEntityTypeConfiguration<Customer>{
 			.HasConstraintName("FK_Customar_Person")
 			.OnDelete(DeleteBehavior.Cascade);
 
-		builder.Property(x=> x.CreatedAt)
+		builder.Property(x => x.CreatedAt)
 			.HasColumnName("CreatedAt")
 			.HasColumnType("datetime")
 			.IsRequired();

@@ -3,7 +3,7 @@ using AgendaApi.Models.Profiles;
 
 namespace AgendaApi.Collections.Services.Interfaces.Profiles;
 
-public interface IUserService{
+public interface IUserService {
 	Task<IList<User>> HandleListUser();
 	Task<User> HandleCreateUser(UserViewModel model);
 	bool HandleAuthenticateUser(LoginViewModel model);

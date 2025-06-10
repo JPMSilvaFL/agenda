@@ -5,8 +5,7 @@ using AgendaApi.Models.Schedule;
 
 namespace AgendaApi.Collections.Services.Schedule;
 
-public class PurposeService : IPurposeService{
-
+public class PurposeService : IPurposeService {
 	private readonly IPurposeRepository _purposeRepository;
 
 	public PurposeService(IPurposeRepository purposeRepository) {

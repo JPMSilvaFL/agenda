@@ -47,12 +47,9 @@ void ConfigureMvc(WebApplicationBuilder builder) {
 }
 
 void ConfigureServices(WebApplicationBuilder builder) {
-
-	builder.Services.AddCors(options =>
-	{
+	builder.Services.AddCors(options => {
 		options.AddPolicy("MyCorsPolicy", // Nome da política
-			policy =>
-			{
+			policy => {
 				policy.WithOrigins("http://localhost:5173"); // Origens permitidas
 				policy.WithMethods("GET", "POST", "PUT", "DELETE"); // Métodos HTTP permitidos
 				policy.WithHeaders("Content-Type", "Authorization"); // Headers permitidos
@@ -65,6 +62,8 @@ void ConfigureServices(WebApplicationBuilder builder) {
 
 	builder.Services.AddDbContext<AgendaDbContext>(options =>
 		options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+	builder.Services.AddHttpContextAccessor();
 
 
 	builder.Services.AddTransient<UserService>();
@@ -89,7 +88,6 @@ void ConfigureServices(WebApplicationBuilder builder) {
 	builder.Services.AddTransient<IPurposeRepository, PurposeRepository>();
 	builder.Services.AddTransient<IScheduledRepository, ScheduledRepository>();
 	builder.Services.AddTransient<ILogActivityRepository, LogActivityRepository>();
-
 }
 
 void ConfigureAuthentication(WebApplicationBuilder builder) {

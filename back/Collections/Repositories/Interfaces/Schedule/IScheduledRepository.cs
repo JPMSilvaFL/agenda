@@ -2,6 +2,4 @@
 
 namespace AgendaApi.Collections.Repositories.Interfaces.Schedule;
 
-public interface IScheduledRepository : IRepository<Scheduled> {
-
-}
+public interface IScheduledRepository : IRepository<Scheduled> { }

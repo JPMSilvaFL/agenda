@@ -24,15 +24,15 @@ public class PurposeMap : IEntityTypeConfiguration<Purpose> {
 			.HasConstraintName("FK_Purpose_FromRole")
 			.OnDelete(DeleteBehavior.Cascade);
 
-		builder.Property(x=>x.Name)
+		builder.Property(x => x.Name)
 			.HasColumnName("Name")
 			.HasColumnType("nvarchar")
 			.HasMaxLength(30)
 			.IsRequired();
-		builder.HasIndex(x=>x.Name)
+		builder.HasIndex(x => x.Name)
 			.IsUnique();
 
-		builder.Property(x=>x.Description)
+		builder.Property(x => x.Description)
 			.HasColumnName("Description")
 			.HasColumnType("nvarchar")
 			.HasMaxLength(150)

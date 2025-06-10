@@ -2,5 +2,5 @@
 
 public enum ELogType {
 	Error = 1,
-	Success = 2,
+	Success = 2
 }

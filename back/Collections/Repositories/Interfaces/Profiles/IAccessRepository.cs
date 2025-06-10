@@ -2,6 +2,4 @@
 
 namespace AgendaApi.Collections.Repositories.Interfaces.Profiles;
 
-public interface IAccessRepository : IRepository<Access> {
-	
-}
+public interface IAccessRepository : IRepository<Access> { }

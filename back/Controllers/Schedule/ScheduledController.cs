@@ -1,5 +1,3 @@
 ﻿namespace AgendaApi.Controllers.Schedule;
 
-public class ScheduledController {
-	
-}
+public class ScheduledController { }

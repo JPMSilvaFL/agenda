@@ -17,44 +17,44 @@ public class AvailableMap : IEntityTypeConfiguration<Available> {
 		builder.Property(x => x.IdScheduled)
 			.HasColumnName("Scheduled")
 			.HasColumnType("uniqueidentifier");
-		builder.HasOne(x=>x.FromScheduled)
+		builder.HasOne(x => x.FromScheduled)
 			.WithMany()
-			.HasForeignKey(x=>x.IdScheduled)
+			.HasForeignKey(x => x.IdScheduled)
 			.HasConstraintName("FK_Available_Scheduled")
 			.OnDelete(DeleteBehavior.ClientSetNull);
 
-		builder.Property(x=> x.IdEmployee)
+		builder.Property(x => x.IdEmployee)
 			.HasColumnName("Employee")
 			.HasColumnType("uniqueidentifier")
 			.IsRequired();
-		builder.HasOne(x=> x.FromEmployee)
+		builder.HasOne(x => x.FromEmployee)
 			.WithMany()
-			.HasForeignKey(x=>x.IdEmployee)
+			.HasForeignKey(x => x.IdEmployee)
 			.HasConstraintName("FK_Available_Employee")
 			.OnDelete(DeleteBehavior.NoAction);
 
-		builder.Property(x=> x.InitialTime)
+		builder.Property(x => x.InitialTime)
 			.HasColumnName("InitialTime")
 			.HasColumnType("datetime")
 			.IsRequired();
-		builder.HasIndex(x=>x.InitialTime)
+		builder.HasIndex(x => x.InitialTime)
 			.IsUnique();
 
-		builder.Property(x=> x.FinalTime)
+		builder.Property(x => x.FinalTime)
 			.HasColumnName("FinalTime")
 			.HasColumnType("datetime")
 			.IsRequired();
-		builder.HasIndex(x=>x.FinalTime)
+		builder.HasIndex(x => x.FinalTime)
 			.IsUnique();
 
-		builder.Property(x=> x.Status)
+		builder.Property(x => x.Status)
 			.HasColumnName("Status")
 			.HasColumnType("char")
 			.HasDefaultValue('A')
 			.HasMaxLength(1)
 			.IsRequired();
 
-		builder.Property(x=> x.CreatedAt)
+		builder.Property(x => x.CreatedAt)
 			.HasColumnName("CreatedAt")
 			.HasColumnType("datetime")
 			.IsRequired();

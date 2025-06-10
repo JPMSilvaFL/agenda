@@ -6,7 +6,5 @@ public class SearchPurposeViewModel {
 	public int Skip { get; set; }
 	public int Take { get; set; }
 
-	public SearchPurposeViewModel() {
-
-	}
+	public SearchPurposeViewModel() { }
 }

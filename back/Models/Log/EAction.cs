@@ -4,5 +4,5 @@ public enum EAction {
 	Created = 1,
 	Updated = 2,
 	Deleted = 3,
-	Saved = 4,
+	Saved = 4
 }

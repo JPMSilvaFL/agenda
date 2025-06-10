@@ -21,8 +21,8 @@ public class RoleMap : IEntityTypeConfiguration<Role> {
 			.IsRequired();
 		builder.HasIndex(x => x.Name)
 			.IsUnique();
-		
-		builder.Property(x=>x.Description)
+
+		builder.Property(x => x.Description)
 			.HasColumnName("Description")
 			.HasColumnType("nvarchar")
 			.HasMaxLength(100)

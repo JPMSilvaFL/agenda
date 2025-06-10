@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AgendaApi.Data.Mappings.Profiles;
 
-public class EmployeeMap : IEntityTypeConfiguration<Employee>{
+public class EmployeeMap : IEntityTypeConfiguration<Employee> {
 	public void Configure(EntityTypeBuilder<Employee> builder) {
 		builder.ToTable("Employee");
 
 		builder.HasKey(x => x.Id);
-		builder.Property(x=> x.Id)
+		builder.Property(x => x.Id)
 			.HasColumnName("Id")
 			.HasColumnType("uniqueidentifier")
 			.IsRequired();
@@ -18,9 +18,9 @@ public class EmployeeMap : IEntityTypeConfiguration<Employee>{
 			.HasColumnName("Role")
 			.HasColumnType("uniqueidentifier")
 			.IsRequired();
-		builder.HasOne(x=>x.FromRole)
+		builder.HasOne(x => x.FromRole)
 			.WithMany()
-			.HasForeignKey(x=>x.IdRole)
+			.HasForeignKey(x => x.IdRole)
 			.HasConstraintName("FK_Employee_Role")
 			.OnDelete(DeleteBehavior.Restrict);
 
@@ -28,7 +28,7 @@ public class EmployeeMap : IEntityTypeConfiguration<Employee>{
 			.HasColumnName("Person")
 			.HasColumnType("uniqueidentifier")
 			.IsRequired();
-		builder.HasIndex(x=> x.IdPerson)
+		builder.HasIndex(x => x.IdPerson)
 			.IsUnique();
 		builder.HasOne(x => x.FromPerson)
 			.WithOne()
@@ -36,7 +36,7 @@ public class EmployeeMap : IEntityTypeConfiguration<Employee>{
 			.HasConstraintName("FK_Employee_Person")
 			.OnDelete(DeleteBehavior.Cascade);
 
-		builder.Property(x=> x.CreatedAt)
+		builder.Property(x => x.CreatedAt)
 			.HasColumnName("CreatedAt")
 			.HasColumnType("datetime")
 			.IsRequired();

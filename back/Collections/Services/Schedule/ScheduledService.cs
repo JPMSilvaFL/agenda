@@ -1,5 +1,3 @@
 ﻿namespace AgendaApi.Collections.Services.Schedule;
 
-public class ScheduledService {
-	
-}
+public class ScheduledService { }

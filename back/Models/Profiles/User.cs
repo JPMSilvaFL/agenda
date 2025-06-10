@@ -14,13 +14,11 @@ public class User {
 
 	public User(string username, string passwordHash, Person person, Guid idAccess) {
 		Id = Guid.NewGuid();
-		Username=username;
-		PasswordHash=passwordHash;
+		Username = username;
+		PasswordHash = passwordHash;
 		FromPerson = person;
 		IdPerson = person.Id;
 		IdAccess = idAccess;
 		CreatedAt = DateTime.UtcNow;
 	}
-
-
 }

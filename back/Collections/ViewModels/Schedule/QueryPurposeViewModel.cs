@@ -1,7 +1,7 @@
 ﻿namespace AgendaApi.Collections.ViewModels.Schedule;
 
 public class QueryPurposeViewModel {
-	public List<QueryPurposeViewModelAux> list { get; set; } = new List<QueryPurposeViewModelAux>();
+	public List<QueryPurposeViewModelAux> list { get; set; } = new();
 
 	public QueryPurposeViewModel(IEnumerable<QueryPurposeViewModelAux> model) {
 		list.AddRange(model);
@@ -16,9 +16,8 @@ public class QueryPurposeViewModelAux {
 	public DateTime? UpdatedAt { get; set; }
 	public string Role { get; set; }
 
-	public QueryPurposeViewModelAux() {
+	public QueryPurposeViewModelAux() { }
 
-	}
 	public QueryPurposeViewModelAux(string Name, string Description, float Value, DateTime CreatedAt, DateTime? UpdatedAt, string Role) {
 		this.Name = Name;
 		this.Description = Description;

@@ -3,6 +3,5 @@
 namespace AgendaApi.Collections.Services.Interfaces.Utilities;
 
 public interface ILogActivityService {
-	LogSuccess CreateLogSuccess(ELogCode code, string description);
-	Task CreateLog(Guid user, ELogType type, EAction action, ELogCode code, string description);
+	Task CreateLog(ELogType type, EAction action, ELogCode code, Guid objectId, string description);
 }

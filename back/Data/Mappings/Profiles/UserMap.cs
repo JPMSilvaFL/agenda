@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AgendaApi.Data.Mappings.Profiles;
 
-public class UserMap : IEntityTypeConfiguration<User>{
+public class UserMap : IEntityTypeConfiguration<User> {
 	public void Configure(EntityTypeBuilder<User> builder) {
 		builder.ToTable("User");
 
-		builder.HasKey(x=> x.Id);
+		builder.HasKey(x => x.Id);
 		builder.Property(x => x.Id)
 			.HasColumnName("Id")
 			.HasColumnType("uniqueidentifier")
@@ -28,7 +28,7 @@ public class UserMap : IEntityTypeConfiguration<User>{
 			.HasMaxLength(255)
 			.IsRequired();
 
-		builder.Property(x=>x.IdPerson)
+		builder.Property(x => x.IdPerson)
 			.HasColumnName("Person")
 			.HasColumnType("uniqueidentifier")
 			.IsRequired();
@@ -46,7 +46,7 @@ public class UserMap : IEntityTypeConfiguration<User>{
 			.IsRequired();
 		builder.HasOne(x => x.FromAccess)
 			.WithMany()
-			.HasForeignKey(x=>x.IdAccess)
+			.HasForeignKey(x => x.IdAccess)
 			.HasConstraintName("FK_User_Access")
 			.OnDelete(DeleteBehavior.Restrict);
 

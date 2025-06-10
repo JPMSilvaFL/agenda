@@ -7,13 +7,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AgendaApi.Collections.Repositories.Profiles;
 
-public class UserRepository : Repository<User>, IUserRepository{
-
+public class UserRepository : Repository<User>, IUserRepository {
 	private readonly AgendaDbContext _context;
 
 	public UserRepository(AgendaDbContext context) : base(context) {
 		_context = context;
 	}
+
 	public async Task<User> GetUser(string username) {
 		var user = await _context
 			.Users

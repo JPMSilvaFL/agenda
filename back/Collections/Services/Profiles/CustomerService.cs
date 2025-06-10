@@ -7,12 +7,12 @@ using AgendaApi.Models.Profiles;
 namespace AgendaApi.Collections.Services.Profiles;
 
 public class CustomerService : ICustomerService {
-
 	private readonly ICustomerRepository _customerRepository;
 
 	public CustomerService(ICustomerRepository customerRepository) {
 		_customerRepository = customerRepository;
 	}
+
 	public async Task<Customer> HandleCreateCustomer(CustomerViewModel model) {
 		var customer = new Customer(model.IdPerson);
 		await _customerRepository.AddAsync(customer);
