@@ -14,13 +14,15 @@ public class PurposeController : ControllerBase {
 	}
 
 	[HttpPost("api/v1/purpose")]
-	public async Task<IActionResult> CreatePurpose([FromBody] PurposeViewModel model) {
+	public async Task<IActionResult> CreatePurpose(
+		[FromBody] PurposeViewModel model) {
 		var result = await _purposeService.HandleCreatePurpose(model);
 		return Ok(new ResultViewModel<Purpose>(result));
 	}
 
 	[HttpGet("api/v1/purpose")]
-	public async Task<IActionResult> GetPurposes([FromBody] SearchPurposeViewModel model) {
+	public async Task<IActionResult> GetPurposes(
+		[FromBody] SearchPurposeViewModel model) {
 		var result = await _purposeService.HandleGetPurpose(model);
 
 		var viewModel = result.Select(p => new QueryPurposeViewModelAux {

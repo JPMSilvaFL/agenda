@@ -5,5 +5,7 @@ namespace AgendaApi.Collections.Services.Interfaces.Schedule;
 
 public interface IAvailableService {
 	Task<Available> HandleCreateAvailable(AvailableViewModel model);
-	Task<List<QueryAvailableViewModel>> HandleSearchAvailable(SearchAvailableViewModel model);
+
+	Task<List<QueryAvailableViewModel>> HandleSearchAvailable(
+		SearchAvailableViewModel model);
 }

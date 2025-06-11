@@ -12,15 +12,20 @@ public class AvailableService : IAvailableService {
 		_availableRepository = availableRepository;
 	}
 
-	public async Task<Available> HandleCreateAvailable(AvailableViewModel model) {
-		var available = new Available(model.IdEmployee, model.InitialTime, model.FinalTime);
+	public async Task<Available>
+		HandleCreateAvailable(AvailableViewModel model) {
+		var available = new Available(model.IdEmployee, model.InitialTime,
+			model.FinalTime);
 		await _availableRepository.AddAsync(available);
 		await _availableRepository.SaveChangesAsync();
 		return available;
 	}
 
-	public async Task<List<QueryAvailableViewModel>> HandleSearchAvailable(SearchAvailableViewModel model) {
-		var result = await _availableRepository.SearchAvailable(model.Status, model.Skip, model.Take);
+	public async Task<List<QueryAvailableViewModel>> HandleSearchAvailable(
+		SearchAvailableViewModel model) {
+		var result =
+			await _availableRepository.SearchAvailable(model.Status, model.Skip,
+				model.Take);
 		return result;
 	}
 }

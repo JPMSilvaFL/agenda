@@ -15,7 +15,8 @@ public class CustomerController : ControllerBase {
 	}
 
 	[HttpPost("api/v1/customers/")]
-	public async Task<IActionResult> CreateCustomer([FromBody] CustomerViewModel model) {
+	public async Task<IActionResult> CreateCustomer(
+		[FromBody] CustomerViewModel model) {
 		if (!ModelState.IsValid)
 			return BadRequest(new ResultViewModel<Customer>(ModelState.Values
 				.SelectMany(x => x.Errors)

@@ -9,4 +9,15 @@ public class PersonViewModel {
 	[Required] public string Document { get; set; }
 	[Required] public string Type { get; set; }
 	[Required] public string Address { get; set; }
+
+	public PersonViewModel(string fullName, string email, string phone,
+		string document, string type,
+		string address) {
+		FullName = fullName;
+		Email = email;
+		Phone = phone;
+		Document = document;
+		Type = type;
+		Address = address;
+	}
 }

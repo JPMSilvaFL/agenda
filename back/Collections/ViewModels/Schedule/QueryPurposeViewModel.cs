@@ -18,7 +18,8 @@ public class QueryPurposeViewModelAux {
 
 	public QueryPurposeViewModelAux() { }
 
-	public QueryPurposeViewModelAux(string Name, string Description, float Value, DateTime CreatedAt, DateTime? UpdatedAt, string Role) {
+	public QueryPurposeViewModelAux(string Name, string Description,
+		float Value, DateTime CreatedAt, DateTime? UpdatedAt, string Role) {
 		this.Name = Name;
 		this.Description = Description;
 		this.Value = Value;

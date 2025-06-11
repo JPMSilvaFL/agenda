@@ -7,7 +7,8 @@ namespace AgendaApi.Collections.Services.Utilities;
 public class PasswordHashService : IPasswordHashService {
 	public bool VerifyPassword(string password, string hash, User user) {
 		var hasher = new PasswordHasher<object>();
-		return hasher.VerifyHashedPassword(user, password, hash) == PasswordVerificationResult.Success;
+		return hasher.VerifyHashedPassword(user, password, hash) ==
+		       PasswordVerificationResult.Success;
 	}
 
 	public string HashPassword(string password) {

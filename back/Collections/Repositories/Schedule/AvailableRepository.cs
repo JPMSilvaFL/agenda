@@ -13,9 +13,11 @@ public class AvailableRepository : Repository<Available>, IAvailableRepository {
 		_context = context;
 	}
 
-	public async Task<List<QueryAvailableViewModel>> SearchAvailable(char status, int skip, int take) {
+	public async Task<List<QueryAvailableViewModel>> SearchAvailable(
+		char status, int skip, int take) {
 		var result = _context.Availables.AsQueryable();
-		if (status is 'A' or 'F' or 'C') result = result.Where(a => a.Status == status);
+		if (status is 'A' or 'F' or 'C')
+			result = result.Where(a => a.Status == status);
 
 		return await result
 			.Include(a => a.FromEmployee)

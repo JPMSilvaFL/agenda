@@ -14,13 +14,15 @@ public class AvailableController : ControllerBase {
 	}
 
 	[HttpPost("api/v1/available")]
-	public async Task<IActionResult> CreateAvailable([FromBody] AvailableViewModel model) {
+	public async Task<IActionResult> CreateAvailable(
+		[FromBody] AvailableViewModel model) {
 		var result = await _availableService.HandleCreateAvailable(model);
 		return Ok(new ResultViewModel<Available>(result));
 	}
 
 	[HttpGet("api/v1/available")]
-	public async Task<IActionResult> SearchAvailables(SearchAvailableViewModel model) {
+	public async Task<IActionResult> SearchAvailables(
+		SearchAvailableViewModel model) {
 		var result = await _availableService.HandleSearchAvailable(model);
 		return Ok(new ResultViewModel<List<QueryAvailableViewModel>>(result));
 	}

@@ -3,7 +3,8 @@
 public enum ELogCode {
 	// Success
 	CreatePerson = 1,
+	CreateUser = 2,
 
 	// Errors
-	DuplicatePersonKeys = 1001,
+	DuplicatePersonKeys = 1001
 }

@@ -19,7 +19,8 @@ public class PersonController : ControllerBase {
 
 	[HttpPost("api/v1/persons/")]
 	[Authorize(Roles = "Admin")]
-	public async Task<IActionResult> CreatePerson([FromBody] PersonViewModel model) {
+	public async Task<IActionResult> CreatePerson(
+		[FromBody] PersonViewModel model) {
 		if (!ModelState.IsValid)
 			return BadRequest(new ResultViewModel<Customer>(ModelState.Values
 				.SelectMany(x => x.Errors)

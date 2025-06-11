@@ -4,7 +4,8 @@ using AgendaApi.Models.Log;
 
 namespace AgendaApi.Collections.Repositories.Utilities;
 
-public class LogActivityRepository : Repository<LogActivity>, ILogActivityRepository {
+public class LogActivityRepository : Repository<LogActivity>,
+	ILogActivityRepository {
 	private readonly AgendaDbContext _context;
 
 	public LogActivityRepository(AgendaDbContext context) : base(context) {

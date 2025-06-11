@@ -49,7 +49,8 @@ public class TokenService : ITokenService {
 				new Claim(ClaimTypes.Role, userDb.FromAccess!.Name)
 			]),
 			Expires = DateTime.UtcNow.AddHours(6),
-			SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
+			SigningCredentials = new SigningCredentials(
+				new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
 		};
 		var token = tokenHandler.CreateToken(tokenDescriptor);
 		var tokenGerado = tokenHandler.WriteToken(token);

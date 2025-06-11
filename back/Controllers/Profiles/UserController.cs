@@ -14,13 +14,15 @@ public class UserController : ControllerBase {
 	}
 
 	[HttpGet("api/v1/users/")]
-	public async Task<ActionResult<List<User>>> GetUsers([FromBody] SearchUserViewModel model) {
+	public async Task<ActionResult<List<User>>> GetUsers(
+		[FromBody] SearchUserViewModel model) {
 		var users = await _userService.HandleListUser();
 		return Ok(new ResultViewModel<IList<User>>(users));
 	}
 
 	[HttpPost("api/v1/users/")]
-	public async Task<IActionResult> CreateUser([FromBody] UserViewModel model) {
+	public async Task<IActionResult>
+		CreateUser([FromBody] UserViewModel model) {
 		if (!ModelState.IsValid)
 			return BadRequest(new ResultViewModel<Customer>(ModelState.Values
 				.SelectMany(x => x.Errors)
@@ -28,6 +30,6 @@ public class UserController : ControllerBase {
 				.ToList()));
 
 		var result = await _userService.HandleCreateUser(model);
-		return Ok(new ResultViewModel<User>(result));
+		return Ok("User created Successfully.");
 	}
 }

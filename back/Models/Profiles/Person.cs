@@ -16,7 +16,8 @@ public class Person {
 
 	public Person() { }
 
-	public Person(string fullName, string email, string document, string phone, string address, string type) {
+	public Person(string fullName, string email, string document, string phone,
+		string address, string type) {
 		Id = Guid.NewGuid();
 		FullName = fullName;
 		Email = email;

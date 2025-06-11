@@ -13,17 +13,21 @@ public class PersonService : IPersonService {
 	private readonly ILogActivityService _logActivityService;
 
 
-	public PersonService(IPersonRepository personRepository, ILogActivityService logActivityService) {
+	public PersonService(IPersonRepository personRepository,
+		ILogActivityService logActivityService) {
 		_personRepository = personRepository;
 		_logActivityService = logActivityService;
 	}
 
 	public async Task<Person> HandleCreatePerson(PersonViewModel model) {
-		var person = new Person(model.FullName, model.Email, model.Document, model.Phone, model.Address, model.Type);
+		var person = new Person(model.FullName, model.Email, model.Document,
+			model.Phone, model.Address, model.Type);
 		if (await _personRepository.ConfirmUniqueKey(person.Document))
-			throw new DuplicatePersonException("A person with the same document already exists.");
-		if(await _personRepository.ConfirmUniqueKey(person.Email))
-			throw new DuplicatePersonException("A person with the same email already exists.");
+			throw new DuplicatePersonException(
+				"A person with the same document already exists.");
+		if (await _personRepository.ConfirmUniqueKey(person.Email))
+			throw new DuplicatePersonException(
+				"A person with the same email already exists.");
 		await _personRepository.AddAsync(person);
 		await _personRepository.SaveChangesAsync();
 

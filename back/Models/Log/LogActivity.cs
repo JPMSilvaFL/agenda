@@ -15,7 +15,8 @@ public class LogActivity {
 
 	public LogActivity() { }
 
-	public LogActivity(Guid user, ELogType type, EAction action, ELogCode code, Guid objectId, string description) {
+	public LogActivity(Guid user, ELogType type, EAction action, ELogCode code,
+		Guid objectId, string description) {
 		Type = type;
 		User = user;
 		Action = action;

@@ -18,7 +18,8 @@ public class Available {
 
 	public Available() { }
 
-	public Available(Guid idEmployee, DateTime initialTime, DateTime finalTime) {
+	public Available(Guid idEmployee, DateTime initialTime,
+		DateTime finalTime) {
 		Id = Guid.NewGuid();
 		IdEmployee = idEmployee;
 		InitialTime = initialTime;

@@ -15,7 +15,8 @@ public class AccessController : ControllerBase {
 	}
 
 	[HttpPost("api/v1/access/")]
-	public async Task<IActionResult> CreateAccess([FromBody] AccessViewModel model) {
+	public async Task<IActionResult> CreateAccess(
+		[FromBody] AccessViewModel model) {
 		if (!ModelState.IsValid)
 			return BadRequest(new ResultViewModel<Access>(ModelState.Values
 				.SelectMany(x => x.Errors)

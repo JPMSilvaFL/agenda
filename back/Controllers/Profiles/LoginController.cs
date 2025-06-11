@@ -13,7 +13,8 @@ public class LoginController : ControllerBase {
 	}
 
 	[HttpPost("api/v1/login/")]
-	public async Task<IActionResult> GeraTokenLogin([FromBody] LoginViewModel model) {
+	public async Task<IActionResult> GeraTokenLogin(
+		[FromBody] LoginViewModel model) {
 		try {
 			return Ok(await _tokenService.GenerateToken(model));
 		}

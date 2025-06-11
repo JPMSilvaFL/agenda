@@ -13,13 +13,16 @@ public class PurposeService : IPurposeService {
 	}
 
 	public async Task<Purpose> HandleCreatePurpose(PurposeViewModel model) {
-		var purpose = new Purpose(model.IdRole, model.Name, model.Description, model.Value);
+		var purpose = new Purpose(model.IdRole, model.Name, model.Description,
+			model.Value);
 		await _purposeRepository.AddAsync(purpose);
 		return purpose;
 	}
 
-	public async Task<List<Purpose>> HandleGetPurpose(SearchPurposeViewModel model) {
-		var result = await _purposeRepository.GetPurpose(model.Role, model.Name, model.Skip, model.Take);
+	public async Task<List<Purpose>> HandleGetPurpose(
+		SearchPurposeViewModel model) {
+		var result = await _purposeRepository.GetPurpose(model.Role, model.Name,
+			model.Skip, model.Take);
 		return result;
 	}
 }

@@ -41,10 +41,14 @@ void ConfigureMvc(WebApplicationBuilder builder) {
 	builder
 		.Services
 		.AddControllers()
-		.ConfigureApiBehaviorOptions(options => { options.SuppressModelStateInvalidFilter = true; })
+		.ConfigureApiBehaviorOptions(options => {
+			options.SuppressModelStateInvalidFilter = true;
+		})
 		.AddJsonOptions(x => {
-			x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-			x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault;
+			x.JsonSerializerOptions.ReferenceHandler =
+				ReferenceHandler.IgnoreCycles;
+			x.JsonSerializerOptions.DefaultIgnoreCondition =
+				JsonIgnoreCondition.WhenWritingDefault;
 		});
 }
 
@@ -52,18 +56,23 @@ void ConfigureServices(WebApplicationBuilder builder) {
 	builder.Services.AddCors(options => {
 		options.AddPolicy("MyCorsPolicy", // Nome da política
 			policy => {
-				policy.WithOrigins("http://localhost:5173"); // Origens permitidas
-				policy.WithMethods("GET", "POST", "PUT", "DELETE"); // Métodos HTTP permitidos
-				policy.WithHeaders("Content-Type", "Authorization"); // Headers permitidos
+				policy.WithOrigins(
+					"http://localhost:5173"); // Origens permitidas
+				policy.WithMethods("GET", "POST", "PUT",
+					"DELETE"); // Métodos HTTP permitidos
+				policy.WithHeaders("Content-Type",
+					"Authorization"); // Headers permitidos
 				// policy.AllowAnyOrigin(); // Permite todas as origens (não recomendado para produção)
 				// policy.AllowAnyMethod(); // Permite todos os métodos (não recomendado para produção)
 				// policy.AllowAnyHeader(); // Permite todos os headers (não recomendado para produção)
-				policy.AllowCredentials(); // Permite credenciais (cookies, autenticação)
+				policy
+					.AllowCredentials(); // Permite credenciais (cookies, autenticação)
 			});
 	});
 
 	builder.Services.AddDbContext<AgendaDbContext>(options =>
-		options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+		options.UseSqlServer(
+			builder.Configuration.GetConnectionString("DefaultConnection")));
 
 	builder.Services.AddHttpContextAccessor();
 	// builder.Services.AddScoped<ExceptionMiddleware>();
@@ -77,7 +86,7 @@ void ConfigureServices(WebApplicationBuilder builder) {
 	builder.Services.AddScoped<IPasswordHashService, PasswordHashService>();
 	builder.Services.AddScoped<IAvailableService, AvailableService>();
 	builder.Services.AddScoped<IPurposeService, PurposeService>();
-	builder.Services.AddScoped<ILogActivityService, LogActivityService>();
+	builder.Services.AddTransient<ILogActivityService, LogActivityService>();
 
 
 	builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));

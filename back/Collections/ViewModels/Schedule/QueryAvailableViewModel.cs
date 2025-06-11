@@ -6,7 +6,8 @@ public class QueryAvailableViewModel {
 	public DateTime FinalTime { get; set; }
 	public char Status { get; set; }
 
-	public QueryAvailableViewModel(string namePerson, DateTime initialTime, DateTime finalTime, char status) {
+	public QueryAvailableViewModel(string namePerson, DateTime initialTime,
+		DateTime finalTime, char status) {
 		NamePerson = namePerson;
 		InitialTime = initialTime;
 		FinalTime = finalTime;
