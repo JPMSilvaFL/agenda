@@ -1,6 +1,7 @@
 using System.Text;
 using System.Text.Json.Serialization;
 using AgendaApi;
+using AgendaApi.Collections.Middlewares;
 using AgendaApi.Collections.Repositories;
 using AgendaApi.Collections.Repositories.Interfaces;
 using AgendaApi.Collections.Repositories.Interfaces.Profiles;
@@ -9,7 +10,6 @@ using AgendaApi.Collections.Repositories.Interfaces.Utilities;
 using AgendaApi.Collections.Repositories.Profiles;
 using AgendaApi.Collections.Repositories.Schedule;
 using AgendaApi.Collections.Repositories.Utilities;
-using AgendaApi.Collections.Services.Interfaces;
 using AgendaApi.Collections.Services.Interfaces.Profiles;
 using AgendaApi.Collections.Services.Interfaces.Schedule;
 using AgendaApi.Collections.Services.Interfaces.Utilities;
@@ -29,10 +29,12 @@ ConfigureServices(builder);
 
 var app = builder.Build();
 
+
 LoadConfiguration(app);
+
 app.UseCors("MyCorsPolicy");
+app.UseMiddleware<ExceptionMiddleware>();
 app.MapControllers();
-app.UseHttpsRedirection();
 app.Run();
 
 void ConfigureMvc(WebApplicationBuilder builder) {
@@ -64,30 +66,30 @@ void ConfigureServices(WebApplicationBuilder builder) {
 		options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 	builder.Services.AddHttpContextAccessor();
+	// builder.Services.AddScoped<ExceptionMiddleware>();
 
-
-	builder.Services.AddTransient<UserService>();
-	builder.Services.AddTransient<IPersonService, PersonService>();
-	builder.Services.AddTransient<ICustomerService, CustomerService>();
-	builder.Services.AddTransient<IUserService, UserService>();
-	builder.Services.AddTransient<IAccessService, AccessService>();
-	builder.Services.AddTransient<ITokenService, TokenService>();
+	builder.Services.AddScoped<UserService>();
+	builder.Services.AddScoped<IPersonService, PersonService>();
+	builder.Services.AddScoped<ICustomerService, CustomerService>();
+	builder.Services.AddScoped<IUserService, UserService>();
+	builder.Services.AddScoped<IAccessService, AccessService>();
+	builder.Services.AddScoped<ITokenService, TokenService>();
 	builder.Services.AddScoped<IPasswordHashService, PasswordHashService>();
-	builder.Services.AddTransient<IAvailableService, AvailableService>();
-	builder.Services.AddTransient<IPurposeService, PurposeService>();
-	builder.Services.AddTransient<ILogActivityService, LogActivityService>();
+	builder.Services.AddScoped<IAvailableService, AvailableService>();
+	builder.Services.AddScoped<IPurposeService, PurposeService>();
+	builder.Services.AddScoped<ILogActivityService, LogActivityService>();
 
 
 	builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
-	builder.Services.AddTransient<IAvailableRepository, AvailableRepository>();
-	builder.Services.AddTransient<IUserRepository, UserRepository>();
-	builder.Services.AddTransient<IPersonRepository, PersonRepository>();
-	builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
-	builder.Services.AddTransient<IAccessRepository, AccessRepository>();
-	builder.Services.AddTransient<ISecretaryRepository, SecretaryRepository>();
-	builder.Services.AddTransient<IPurposeRepository, PurposeRepository>();
-	builder.Services.AddTransient<IScheduledRepository, ScheduledRepository>();
-	builder.Services.AddTransient<ILogActivityRepository, LogActivityRepository>();
+	builder.Services.AddScoped<IAvailableRepository, AvailableRepository>();
+	builder.Services.AddScoped<IUserRepository, UserRepository>();
+	builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+	builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+	builder.Services.AddScoped<IAccessRepository, AccessRepository>();
+	builder.Services.AddScoped<ISecretaryRepository, SecretaryRepository>();
+	builder.Services.AddScoped<IPurposeRepository, PurposeRepository>();
+	builder.Services.AddScoped<IScheduledRepository, ScheduledRepository>();
+	builder.Services.AddScoped<ILogActivityRepository, LogActivityRepository>();
 }
 
 void ConfigureAuthentication(WebApplicationBuilder builder) {

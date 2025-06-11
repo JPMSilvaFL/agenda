@@ -1,12 +1,8 @@
 ﻿using AgendaApi.Collections.Repositories.Interfaces.Profiles;
-using AgendaApi.Collections.Services.Interfaces;
 using AgendaApi.Collections.Services.Interfaces.Profiles;
 using AgendaApi.Collections.Services.Interfaces.Utilities;
-using AgendaApi.Collections.Services.Utilities;
 using AgendaApi.Collections.ViewModels.Profiles;
-using AgendaApi.Collections.ViewModels.Result;
 using AgendaApi.Models.Profiles;
-using Microsoft.AspNetCore.Identity;
 
 namespace AgendaApi.Collections.Services.Profiles;
 
@@ -28,9 +24,6 @@ public class UserService : IUserService {
 	public async Task<User> HandleCreateUser(UserViewModel model) {
 		var person = new Person(model.FullName, model.Email, model.Document, model.Phone, model.Address, model.Type);
 
-		//var accessDatabase = await _accessRepository.GetByIdAsync(model.IdAccess);
-		//var access = new Access(accessDatabase.Id , accessDatabase.Name, accessDatabase.CreatedAt);
-
 		var user = new User(model.Username, model.Password, person, model.IdAccess);
 		var passwordHashed = _passwordHashService.HashPassword(user.PasswordHash);
 		user.PasswordHash = passwordHashed;
@@ -39,15 +32,10 @@ public class UserService : IUserService {
 		return user;
 	}
 
-	public bool HandleAuthenticateUser(LoginViewModel model) {
-		try {
-			var user = _userRepository.GetUser(model.Username);
-			var verifyPassword = _passwordHashService.VerifyPassword(user.Result.PasswordHash, model.Password, user);
-			return verifyPassword;
-		}
-		catch {
-			return false;
-		}
+	public async Task<bool> HandleAuthenticateUser(LoginViewModel model) {
+		var user = await _userRepository.GetUser(model.Username);
+		var verifyPassword = _passwordHashService.VerifyPassword(user.PasswordHash, model.Password, user);
+		return verifyPassword;
 	}
 
 	public async Task<User> HandleGetUser(string username) {

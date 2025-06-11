@@ -12,6 +12,7 @@ namespace AgendaApi.Controllers.Profiles;
 
 public class PersonController : ControllerBase {
 	private readonly IPersonService _personService;
+
 	public PersonController(IPersonService personService) {
 		_personService = personService;
 	}
@@ -24,19 +25,8 @@ public class PersonController : ControllerBase {
 				.SelectMany(x => x.Errors)
 				.Select(x => x.ErrorMessage)
 				.ToList()));
-		try {
-			var result = await _personService.HandleCreatePerson(model);
-			return Ok("Pessoa criada com sucesso!");
-		}
-		catch (DuplicatePersonException e) {
-			return BadRequest(new ResultViewModel<Person>(e.Message));
-		}
-		catch (SqlException e) {
-			return NotFound(new ResultViewModel<Person>(e.Message));
-		}
-		catch (Exception e) {
-			Console.WriteLine(e);
-			return BadRequest(new ResultViewModel<Person>("erro encontrado"));
-		}
+
+		var result = await _personService.HandleCreatePerson(model);
+		return Ok("Pessoa criada com sucesso!");
 	}
 }

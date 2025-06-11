@@ -1,8 +1,8 @@
-﻿using AgendaApi.Collections.ViewModels.Result;
-using AgendaApi.Models.Profiles;
+﻿using AgendaApi.Collections.ViewModels.Profiles;
+using AgendaApi.Collections.ViewModels.Result;
 
 namespace AgendaApi.Collections.Services.Interfaces.Utilities;
 
 public interface ITokenService {
-	Task<ResultViewModel<JwtViewModel>> GenerateToken(User user);
+	Task<JwtViewModel> GenerateToken(LoginViewModel model);
 }

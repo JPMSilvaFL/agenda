@@ -1,31 +1,41 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using AgendaApi.Collections.Services.Interfaces;
+using AgendaApi.Collections.Exceptions;
+using AgendaApi.Collections.Services.Interfaces.Profiles;
 using AgendaApi.Collections.Services.Interfaces.Utilities;
+using AgendaApi.Collections.ViewModels.Profiles;
 using AgendaApi.Collections.ViewModels.Result;
 using AgendaApi.Data;
 using AgendaApi.Models.Profiles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
-namespace AgendaApi.Collections.Services.Profiles;
+namespace AgendaApi.Collections.Services.Utilities;
 
 public class TokenService : ITokenService {
 	private readonly AgendaDbContext _context;
+	private readonly IUserService _userService;
 
-	public TokenService(AgendaDbContext context) {
+	public TokenService(AgendaDbContext context, IUserService userService) {
 		_context = context;
+		_userService = userService;
 	}
 
-	public async Task<ResultViewModel<JwtViewModel>> GenerateToken(User user) {
+	public async Task<JwtViewModel> GenerateToken(LoginViewModel model) {
+		var validateUser = await _userService.HandleAuthenticateUser(model);
+		if (!validateUser)
+			throw new InvalidUserException("Usuário Inválido.");
+
+		var user = await _userService.HandleGetUser(model.Username);
+
 		var userDb = await _context
 			.Users
 			.AsNoTracking()
 			.Include(x => x.FromAccess)
-			.FirstOrDefaultAsync();
+			.FirstOrDefaultAsync(x => x.Id == user.Id);
 
-		if (userDb == null) return new ResultViewModel<JwtViewModel>("Error in pushing user from database");
+		if (userDb == null) return new JwtViewModel(string.Empty);
 
 		var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -33,9 +43,9 @@ public class TokenService : ITokenService {
 
 		var tokenDescriptor = new SecurityTokenDescriptor {
 			Subject = new ClaimsIdentity([
-				new Claim(ClaimTypes.Name, user.Username),
+				new Claim(ClaimTypes.Name, userDb.Username),
 				new Claim("UserId", userDb.Id.ToString()),
-				new Claim("AccessId", user.IdAccess.ToString()),
+				new Claim("AccessId", userDb.IdAccess.ToString()),
 				new Claim(ClaimTypes.Role, userDb.FromAccess!.Name)
 			]),
 			Expires = DateTime.UtcNow.AddHours(6),
@@ -43,6 +53,6 @@ public class TokenService : ITokenService {
 		};
 		var token = tokenHandler.CreateToken(tokenDescriptor);
 		var tokenGerado = tokenHandler.WriteToken(token);
-		return new ResultViewModel<JwtViewModel>(tokenGerado);
+		return new JwtViewModel(tokenGerado);
 	}
 }
