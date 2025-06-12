@@ -2,10 +2,12 @@
 using AgendaApi.Collections.ViewModels.Result;
 using AgendaApi.Collections.ViewModels.Schedule;
 using AgendaApi.Models.Schedule;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AgendaApi.Controllers.Schedule;
 
+[ApiController]
 public class AvailableController : ControllerBase {
 	private readonly IAvailableService _availableService;
 
@@ -14,9 +16,11 @@ public class AvailableController : ControllerBase {
 	}
 
 	[HttpPost("api/v1/available")]
+	[Authorize(Roles = "Admin")]
 	public async Task<IActionResult> CreateAvailable(
 		[FromBody] AvailableViewModel model) {
 		var result = await _availableService.HandleCreateAvailable(model);
+		Console.WriteLine(model.InitialTime);
 		return Ok(new ResultViewModel<Available>(result));
 	}
 

@@ -1,4 +1,5 @@
-﻿using AgendaApi.Collections.Repositories.Interfaces.Schedule;
+﻿using AgendaApi.Collections.Exceptions;
+using AgendaApi.Collections.Repositories.Interfaces.Schedule;
 using AgendaApi.Collections.Services.Interfaces.Schedule;
 using AgendaApi.Collections.ViewModels.Schedule;
 using AgendaApi.Models.Schedule;
@@ -14,10 +15,17 @@ public class AvailableService : IAvailableService {
 
 	public async Task<Available>
 		HandleCreateAvailable(AvailableViewModel model) {
-		var available = new Available(model.IdEmployee, model.InitialTime,
-			model.FinalTime);
-		await _availableRepository.AddAsync(available);
-		await _availableRepository.SaveChangesAsync();
+		Available? available = null;
+		for (var x = model.InitialTime;
+		     x < model.FinalTime;
+		     x = x.AddMinutes(1)) {
+			available = new Available(model.IdEmployee, x);
+			await _availableRepository.AddAsync(available);
+			await _availableRepository.SaveChangesAsync();
+		}
+
+		if (available == null)
+			throw new AvailableErrorException("Available is returning null");
 		return available;
 	}
 

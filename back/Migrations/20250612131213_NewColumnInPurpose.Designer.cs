@@ -4,6 +4,7 @@ using AgendaApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgendaApi.Migrations
 {
     [DbContext(typeof(AgendaDbContext))]
-    partial class AgendaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250612131213_NewColumnInPurpose")]
+    partial class NewColumnInPurpose
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -332,6 +335,10 @@ namespace AgendaApi.Migrations
                         .HasColumnType("datetime")
                         .HasColumnName("CreatedAt");
 
+                    b.Property<DateTime>("FinalTime")
+                        .HasColumnType("datetime")
+                        .HasColumnName("FinalTime");
+
                     b.Property<Guid>("IdEmployee")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("Employee");
@@ -357,6 +364,9 @@ namespace AgendaApi.Migrations
                         .HasColumnName("UpdatedAt");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FinalTime")
+                        .IsUnique();
 
                     b.HasIndex("IdEmployee");
 

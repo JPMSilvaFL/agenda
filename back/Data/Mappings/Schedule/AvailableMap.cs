@@ -40,13 +40,6 @@ public class AvailableMap : IEntityTypeConfiguration<Available> {
 		builder.HasIndex(x => x.InitialTime)
 			.IsUnique();
 
-		builder.Property(x => x.FinalTime)
-			.HasColumnName("FinalTime")
-			.HasColumnType("datetime")
-			.IsRequired();
-		builder.HasIndex(x => x.FinalTime)
-			.IsUnique();
-
 		builder.Property(x => x.Status)
 			.HasColumnName("Status")
 			.HasColumnType("char")

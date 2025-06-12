@@ -28,8 +28,16 @@ public class ExceptionMiddleware {
 			await context.Response.WriteAsync(
 				"An error occurred while attempting connection to database.");
 		}
+		catch (AvailableErrorException e) {
+			_logger.LogError("Create Available failed.");
+			context.Response.StatusCode = 409;
+			await CreateLogError(EAction.Created, ELogCode.AvailableError,
+				e.Message);
+			await context.Response.WriteAsync(
+				"Create Available failed, please try again. If the error persist contact the system admin.");
+		}
 		catch (DuplicatePersonException e) {
-			_logger.LogError("Creation Person failed.");
+			_logger.LogError("Create Person failed.");
 			context.Response.StatusCode = 409;
 			await CreateLogError(EAction.Created, ELogCode.DuplicatePersonKeys,
 				e.Message);

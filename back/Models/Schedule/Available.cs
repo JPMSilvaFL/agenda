@@ -11,19 +11,16 @@ public class Available {
 	public Guid IdEmployee { get; set; }
 	public Employee? FromEmployee { get; set; }
 	public DateTime InitialTime { get; set; }
-	public DateTime FinalTime { get; set; }
 	public char Status { get; set; }
 	public DateTime CreatedAt { get; set; }
 	public DateTime? UpdatedAt { get; set; }
 
 	public Available() { }
 
-	public Available(Guid idEmployee, DateTime initialTime,
-		DateTime finalTime) {
+	public Available(Guid idEmployee, DateTime initialTime) {
 		Id = Guid.NewGuid();
 		IdEmployee = idEmployee;
 		InitialTime = initialTime;
-		FinalTime = finalTime;
 		Status = 'A';
 		CreatedAt = DateTime.UtcNow;
 	}

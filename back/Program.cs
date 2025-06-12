@@ -29,7 +29,6 @@ ConfigureServices(builder);
 
 var app = builder.Build();
 
-
 LoadConfiguration(app);
 
 app.UseCors("MyCorsPolicy");
@@ -87,6 +86,8 @@ void ConfigureServices(WebApplicationBuilder builder) {
 	builder.Services.AddScoped<IAvailableService, AvailableService>();
 	builder.Services.AddScoped<IPurposeService, PurposeService>();
 	builder.Services.AddTransient<ILogActivityService, LogActivityService>();
+	builder.Services.AddScoped<IRoleService, RoleService>();
+	builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
 
 	builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
@@ -99,6 +100,8 @@ void ConfigureServices(WebApplicationBuilder builder) {
 	builder.Services.AddScoped<IPurposeRepository, PurposeRepository>();
 	builder.Services.AddScoped<IScheduledRepository, ScheduledRepository>();
 	builder.Services.AddScoped<ILogActivityRepository, LogActivityRepository>();
+	builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+	builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 }
 
 void ConfigureAuthentication(WebApplicationBuilder builder) {

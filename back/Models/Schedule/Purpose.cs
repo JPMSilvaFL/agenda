@@ -9,17 +9,20 @@ public class Purpose {
 	public string Name { get; set; }
 	public string Description { get; set; }
 	public float Value { get; set; }
+	public int DurationInMinutes { get; set; }
 	public DateTime CreatedAt { get; set; }
 	public DateTime? UpdatedAt { get; set; }
 
 	public Purpose() { }
 
-	public Purpose(Guid idRole, string name, string description, float value) {
+	public Purpose(Guid idRole, string name, string description, float value,
+		int durationInMinutes) {
 		Id = Guid.NewGuid();
 		IdRole = idRole;
 		Name = name;
 		Description = description;
 		Value = value;
+		DurationInMinutes = durationInMinutes;
 		CreatedAt = DateTime.UtcNow;
 	}
 }

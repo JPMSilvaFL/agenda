@@ -43,6 +43,11 @@ public class PurposeMap : IEntityTypeConfiguration<Purpose> {
 			.HasColumnType("float")
 			.IsRequired();
 
+		builder.Property(x => x.DurationInMinutes)
+			.HasColumnName("DurationInMinutes")
+			.HasColumnType("int")
+			.IsRequired();
+
 		builder.Property(x => x.CreatedAt)
 			.HasColumnName("CreatedAt")
 			.HasColumnType("datetime")

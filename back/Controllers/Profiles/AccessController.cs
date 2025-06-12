@@ -3,6 +3,7 @@ using AgendaApi.Collections.Services.Interfaces.Profiles;
 using AgendaApi.Collections.ViewModels.Profiles;
 using AgendaApi.Collections.ViewModels.Result;
 using AgendaApi.Models.Profiles;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AgendaApi.Controllers.Profiles;
@@ -15,6 +16,7 @@ public class AccessController : ControllerBase {
 	}
 
 	[HttpPost("api/v1/access/")]
+	[Authorize(Roles = "Admin")]
 	public async Task<IActionResult> CreateAccess(
 		[FromBody] AccessViewModel model) {
 		if (!ModelState.IsValid)

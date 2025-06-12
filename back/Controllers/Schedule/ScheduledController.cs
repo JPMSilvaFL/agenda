@@ -1,3 +1,9 @@
-﻿namespace AgendaApi.Controllers.Schedule;
+﻿using Microsoft.AspNetCore.Mvc;
 
-public class ScheduledController { }
+namespace AgendaApi.Controllers.Schedule;
+
+[ApiController]
+public class ScheduledController : ControllerBase {
+	[HttpPost("api/v1/scheduled")]
+	public async Task<IActionResult> ToSchedule() { }
+}

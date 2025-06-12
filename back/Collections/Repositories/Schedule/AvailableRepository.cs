@@ -25,7 +25,6 @@ public class AvailableRepository : Repository<Available>, IAvailableRepository {
 			.Select(x => new QueryAvailableViewModel(
 				x.FromEmployee!.FromPerson!.FullName,
 				x.InitialTime,
-				x.FinalTime,
 				x.Status))
 			.AsNoTracking()
 			.Skip(skip)
