@@ -31,4 +31,23 @@ public class AvailableRepository : Repository<Available>, IAvailableRepository {
 			.Take(take)
 			.ToListAsync();
 	}
+
+	public async Task<Available?> GetByEmployeeAndInitialTime(Guid employeeId,
+		DateTime initialTime) {
+		var available = await _context
+			.Availables
+			.FirstAsync(x =>
+				x.IdEmployee == employeeId && x.InitialTime == initialTime);
+
+		return available;
+	}
+
+
+	public async Task<Available> UpdateAvailableScheduled(Guid idAvailable,
+		Guid idScheduled) {
+		var availableScheduled =
+			await _context.Availables.FindAsync(idAvailable);
+		availableScheduled!.IdScheduled = idScheduled;
+		return availableScheduled;
+	}
 }

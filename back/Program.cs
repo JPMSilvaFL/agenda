@@ -88,6 +88,8 @@ void ConfigureServices(WebApplicationBuilder builder) {
 	builder.Services.AddTransient<ILogActivityService, LogActivityService>();
 	builder.Services.AddScoped<IRoleService, RoleService>();
 	builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+	builder.Services.AddScoped<IScheduledService, ScheduledService>();
+	builder.Services.AddScoped<ISecretaryService, SecretaryService>();
 
 
 	builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));

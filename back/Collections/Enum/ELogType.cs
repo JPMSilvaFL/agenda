@@ -1,4 +1,4 @@
-﻿namespace AgendaApi.Models.Log;
+﻿namespace AgendaApi.Collections.Enum;
 
 public enum ELogType {
 	Error = 1,

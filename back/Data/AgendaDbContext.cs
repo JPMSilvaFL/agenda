@@ -42,11 +42,17 @@ public class AgendaDbContext : DbContext {
 		modelBuilder.Entity<LogActivity>()
 			.Property(e => e.Type)
 			.HasConversion<string>();
+
 		modelBuilder.Entity<LogActivity>()
 			.Property(e => e.Action)
 			.HasConversion<string>();
+
 		modelBuilder.Entity<LogActivity>()
 			.Property(e => e.Code)
+			.HasConversion<string>();
+
+		modelBuilder.Entity<Scheduled>()
+			.Property(s => s.Status)
 			.HasConversion<string>();
 	}
 }

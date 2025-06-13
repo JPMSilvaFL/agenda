@@ -1,4 +1,5 @@
-﻿using AgendaApi.Collections.Exceptions;
+﻿using AgendaApi.Collections.Enum;
+using AgendaApi.Collections.Exceptions;
 using AgendaApi.Collections.Services.Interfaces.Utilities;
 using AgendaApi.Models.Log;
 using Microsoft.Data.SqlClient;
@@ -27,6 +28,14 @@ public class ExceptionMiddleware {
 			context.Response.StatusCode = 503;
 			await context.Response.WriteAsync(
 				"An error occurred while attempting connection to database.");
+		}
+		catch (PurposeNullException) {
+			_logger.LogError("Get purpose failed.");
+			context.Response.StatusCode = 409;
+			await CreateLogError(EAction.Get, ELogCode.ErrorGettingPurpose,
+				"Error getting purpose.");
+			await context.Response.WriteAsync(
+				"Get purpose failed, please try again. If the error persist contact the system admin.");
 		}
 		catch (AvailableErrorException e) {
 			_logger.LogError("Create Available failed.");

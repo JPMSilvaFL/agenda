@@ -31,4 +31,12 @@ public class PurposeRepository : Repository<Purpose>, IPurposeRepository {
 			.Take(take)
 			.ToListAsync();
 	}
+
+	public async Task<Purpose?> GetPurposeById(Guid id) {
+		var result = await _context
+			.Purposes
+			.AsNoTracking()
+			.FirstOrDefaultAsync(x => x.Id == id);
+		return result;
+	}
 }

@@ -1,4 +1,5 @@
-﻿using AgendaApi.Collections.Repositories.Interfaces.Utilities;
+﻿using AgendaApi.Collections.Enum;
+using AgendaApi.Collections.Repositories.Interfaces.Utilities;
 using AgendaApi.Collections.Services.Interfaces.Utilities;
 using AgendaApi.Models.Log;
 

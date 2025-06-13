@@ -4,6 +4,7 @@ using AgendaApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgendaApi.Migrations
 {
     [DbContext(typeof(AgendaDbContext))]
-    partial class AgendaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250613173939_AlterTabbleSecretaryFK")]
+    partial class AlterTabbleSecretaryFK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -353,10 +356,8 @@ namespace AgendaApi.Migrations
                         .HasColumnName("Status");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime")
-                        .HasColumnName("UpdatedAt")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasColumnName("UpdatedAt");
 
                     b.HasKey("Id");
 
@@ -401,7 +402,7 @@ namespace AgendaApi.Migrations
                         .HasColumnType("nvarchar")
                         .HasColumnName("Name");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime")
                         .HasColumnName("UpdatedAt");
 

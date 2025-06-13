@@ -4,6 +4,7 @@ using AgendaApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgendaApi.Migrations
 {
     [DbContext(typeof(AgendaDbContext))]
-    partial class AgendaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250613113849_AlterStatusInScheduled")]
+    partial class AlterStatusInScheduled
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -265,7 +268,7 @@ namespace AgendaApi.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("Employee");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime")
                         .HasColumnName("UpdatedAt");
 
@@ -353,10 +356,8 @@ namespace AgendaApi.Migrations
                         .HasColumnName("Status");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime")
-                        .HasColumnName("UpdatedAt")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasColumnName("UpdatedAt");
 
                     b.HasKey("Id");
 
@@ -401,7 +402,7 @@ namespace AgendaApi.Migrations
                         .HasColumnType("nvarchar")
                         .HasColumnName("Name");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime")
                         .HasColumnName("UpdatedAt");
 
@@ -510,12 +511,12 @@ namespace AgendaApi.Migrations
 
             modelBuilder.Entity("AgendaApi.Models.Profiles.Secretary", b =>
                 {
-                    b.HasOne("AgendaApi.Models.Profiles.Employee", "FromEmployee")
+                    b.HasOne("AgendaApi.Models.Profiles.Person", "FromEmployee")
                         .WithOne()
                         .HasForeignKey("AgendaApi.Models.Profiles.Secretary", "IdEmployee")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
-                        .HasConstraintName("FK_Secretary_Employee");
+                        .HasConstraintName("FK_Secretary_FromEmployee");
 
                     b.Navigation("FromEmployee");
                 });

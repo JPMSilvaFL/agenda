@@ -1,4 +1,5 @@
-﻿using AgendaApi.Models.Profiles;
+﻿using AgendaApi.Collections.Enum;
+using AgendaApi.Models.Profiles;
 
 namespace AgendaApi.Models.Schedule;
 
@@ -10,7 +11,7 @@ public class Scheduled {
 	public Secretary? FromSecretary { get; set; }
 	public Guid IdPurpose { get; set; }
 	public Purpose? FromPurpose { get; set; }
-	public bool Status { get; set; }
+	public EScheduled Status { get; set; }
 	public DateTime CreatedAt { get; set; }
 	public DateTime? UpdatedAt { get; set; }
 
@@ -19,7 +20,7 @@ public class Scheduled {
 	public Scheduled(Guid idCustomer, Guid idSecretary, Guid idPurpose) {
 		Id = Guid.NewGuid();
 		IdCustomer = idCustomer;
-		Status = false;
+		Status = EScheduled.Waiting;
 		IdSecretary = idSecretary;
 		IdPurpose = idPurpose;
 		CreatedAt = DateTime.UtcNow;

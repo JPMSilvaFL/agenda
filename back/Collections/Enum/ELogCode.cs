@@ -1,4 +1,4 @@
-﻿namespace AgendaApi.Models.Log;
+﻿namespace AgendaApi.Collections.Enum;
 
 public enum ELogCode {
 	// Success
@@ -9,8 +9,11 @@ public enum ELogCode {
 	CreatePurpose = 5,
 	CreateRole = 6,
 	CreateEmployee = 7,
+	CreateSchedule = 8,
+	CreateSecretary = 9,
 
 	// Errors
 	DuplicatePersonKeys = 1001,
-	AvailableError = 1002
+	AvailableError = 1002,
+	ErrorGettingPurpose = 1003
 }

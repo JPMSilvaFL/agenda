@@ -3,7 +3,7 @@
 public class Secretary {
 	public Guid Id { get; set; }
 	public Guid IdEmployee { get; set; }
-	public Person? FromEmployee { get; set; }
+	public Employee? FromEmployee { get; set; }
 	public DateTime CreatedAt { get; set; }
 	public DateTime? UpdatedAt { get; set; }
 

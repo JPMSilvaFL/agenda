@@ -29,6 +29,21 @@ public class AvailableService : IAvailableService {
 		return available;
 	}
 
+	public async Task<bool> HandleUpdateAvailable(AvailableViewModel model,
+		Guid idScheduled) {
+		for (var x = model.InitialTime;
+		     x < model.FinalTime;
+		     x = x.AddMinutes(1)) {
+			var available =
+				await _availableRepository.GetByEmployeeAndInitialTime(
+					model.IdEmployee, x);
+			if (available != null) available.IdScheduled = idScheduled;
+		}
+
+		await _availableRepository.SaveChangesAsync();
+		return true;
+	}
+
 	public async Task<List<QueryAvailableViewModel>> HandleSearchAvailable(
 		SearchAvailableViewModel model) {
 		var result =

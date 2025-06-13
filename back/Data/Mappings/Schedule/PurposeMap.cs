@@ -55,7 +55,6 @@ public class PurposeMap : IEntityTypeConfiguration<Purpose> {
 
 		builder.Property(x => x.UpdatedAt)
 			.HasColumnName("UpdatedAt")
-			.HasColumnType("datetime")
-			.IsRequired();
+			.HasColumnType("datetime");
 	}
 }

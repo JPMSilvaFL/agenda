@@ -1,4 +1,5 @@
-﻿using AgendaApi.Collections.Repositories.Interfaces.Schedule;
+﻿using AgendaApi.Collections.Enum;
+using AgendaApi.Collections.Repositories.Interfaces.Schedule;
 using AgendaApi.Collections.Services.Interfaces.Schedule;
 using AgendaApi.Collections.Services.Interfaces.Utilities;
 using AgendaApi.Collections.ViewModels.Schedule;
@@ -34,5 +35,10 @@ public class PurposeService : IPurposeService {
 		var result = await _purposeRepository.GetPurpose(model.Role, model.Name,
 			model.Skip, model.Take);
 		return result;
+	}
+
+	public async Task<Purpose> HandleGetPurposeById(Guid idPurpose) {
+		var purpose = await _purposeRepository.GetPurposeById(idPurpose);
+		return purpose;
 	}
 }

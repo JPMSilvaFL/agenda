@@ -1,4 +1,5 @@
-﻿using AgendaApi.Models.Profiles;
+﻿using AgendaApi.Collections.Enum;
+using AgendaApi.Models.Profiles;
 
 namespace AgendaApi.Models.Log;
 

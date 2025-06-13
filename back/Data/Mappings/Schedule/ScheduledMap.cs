@@ -46,8 +46,8 @@ public class ScheduledMap : IEntityTypeConfiguration<Scheduled> {
 
 		builder.Property(x => x.Status)
 			.HasColumnName("Status")
-			.HasColumnType("bit")
-			.HasDefaultValue(1)
+			.HasColumnType("nvarchar")
+			.HasMaxLength(20)
 			.IsRequired();
 
 		builder.Property(x => x.CreatedAt)

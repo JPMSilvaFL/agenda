@@ -21,7 +21,7 @@ public class SecretaryMap : IEntityTypeConfiguration<Secretary> {
 		builder.HasOne(x => x.FromEmployee)
 			.WithOne()
 			.HasForeignKey<Secretary>(x => x.IdEmployee)
-			.HasConstraintName("FK_Secretary_FromEmployee")
+			.HasConstraintName("FK_Secretary_Employee")
 			.OnDelete(DeleteBehavior.NoAction);
 
 		builder.Property(x => x.CreatedAt)
@@ -31,7 +31,6 @@ public class SecretaryMap : IEntityTypeConfiguration<Secretary> {
 
 		builder.Property(x => x.UpdatedAt)
 			.HasColumnName("UpdatedAt")
-			.HasColumnType("datetime")
-			.IsRequired();
+			.HasColumnType("datetime");
 	}
 }

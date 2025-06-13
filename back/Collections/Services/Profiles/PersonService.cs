@@ -1,4 +1,5 @@
-﻿using AgendaApi.Collections.Exceptions;
+﻿using AgendaApi.Collections.Enum;
+using AgendaApi.Collections.Exceptions;
 using AgendaApi.Collections.Repositories.Interfaces.Profiles;
 using AgendaApi.Collections.Services.Interfaces.Profiles;
 using AgendaApi.Collections.Services.Interfaces.Utilities;

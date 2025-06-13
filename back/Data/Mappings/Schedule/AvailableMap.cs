@@ -54,6 +54,8 @@ public class AvailableMap : IEntityTypeConfiguration<Available> {
 
 		builder.Property(x => x.UpdatedAt)
 			.HasColumnName("UpdatedAt")
-			.HasColumnType("datetime");
+			.HasColumnType("datetime")
+			.HasDefaultValueSql("GETDATE()")
+			.ValueGeneratedOnAddOrUpdate();
 	}
 }
