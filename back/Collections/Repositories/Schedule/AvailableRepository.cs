@@ -21,9 +21,10 @@ public class AvailableRepository : Repository<Available>, IAvailableRepository {
 
 		return await result
 			.Include(a => a.FromEmployee)
+			.ThenInclude(x => x!.FromUser)
 			.ThenInclude(x => x!.FromPerson)
 			.Select(x => new QueryAvailableViewModel(
-				x.FromEmployee!.FromPerson!.FullName,
+				x.FromEmployee!.FromUser!.FromPerson!.FullName,
 				x.InitialTime,
 				x.Status))
 			.AsNoTracking()

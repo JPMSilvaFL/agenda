@@ -2,5 +2,6 @@
 
 public class EmployeeViewModel {
 	public Guid IdRole { get; set; }
-	public PersonViewModel Person { get; set; }
+	public Guid? IdUser { get; set; }
+	public UserViewModel? User { get; set; }
 }

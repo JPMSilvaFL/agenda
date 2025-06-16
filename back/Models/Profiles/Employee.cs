@@ -4,16 +4,16 @@ public class Employee {
 	public Guid Id { get; set; }
 	public Guid IdRole { get; set; }
 	public Role? FromRole { get; set; }
-	public Guid IdPerson { get; set; }
-	public Person? FromPerson { get; set; }
+	public Guid IdUser { get; set; }
+	public User? FromUser { get; set; }
 	public DateTime CreatedAt { get; set; }
 
 	public Employee() { }
 
-	public Employee(Guid idRole, Guid idPerson) {
+	public Employee(Guid idRole, Guid idUser) {
 		Id = Guid.NewGuid();
 		IdRole = idRole;
-		IdPerson = idPerson;
+		IdUser = idUser;
 		CreatedAt = DateTime.UtcNow;
 	}
 }

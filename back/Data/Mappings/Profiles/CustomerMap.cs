@@ -14,16 +14,16 @@ public class CustomerMap : IEntityTypeConfiguration<Customer> {
 			.HasColumnType("uniqueidentifier")
 			.IsRequired();
 
-		builder.Property(x => x.IdPerson)
-			.HasColumnName("Person")
+		builder.Property(x => x.IdUser)
+			.HasColumnName("User")
 			.HasColumnType("uniqueidentifier")
 			.IsRequired();
-		builder.HasIndex(x => x.IdPerson)
+		builder.HasIndex(x => x.IdUser)
 			.IsUnique();
-		builder.HasOne(x => x.FromPerson)
+		builder.HasOne(x => x.FromUser)
 			.WithOne()
-			.HasForeignKey<Customer>(x => x.IdPerson)
-			.HasConstraintName("FK_Customar_Person")
+			.HasForeignKey<Customer>(x => x.IdUser)
+			.HasConstraintName("FK_Customar_User")
 			.OnDelete(DeleteBehavior.Cascade);
 
 		builder.Property(x => x.CreatedAt)

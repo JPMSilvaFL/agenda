@@ -2,15 +2,15 @@
 
 public class Customer {
 	public Guid Id { get; private set; }
-	public Person? FromPerson { get; set; }
-	public Guid IdPerson { get; private set; }
+	public User? FromUser { get; set; }
+	public Guid IdUser { get; private set; }
 	public DateTime CreatedAt { get; private set; }
 
 	public Customer() { }
 
-	public Customer(Guid idPerson) {
+	public Customer(Guid idUser) {
 		Id = Guid.NewGuid();
-		IdPerson = idPerson;
+		IdUser = idUser;
 		CreatedAt = DateTime.UtcNow;
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using AgendaApi.Collections.Enum;
+using AgendaApi.Collections.Exceptions;
 using AgendaApi.Collections.Repositories.Interfaces.Profiles;
 using AgendaApi.Collections.Services.Interfaces.Profiles;
 using AgendaApi.Collections.Services.Interfaces.Utilities;
@@ -29,25 +30,35 @@ public class UserService : IUserService {
 	}
 
 	public async Task<User> HandleCreateUser(UserViewModel model) {
+		var verification =
+			await _userRepository.GetUser(model.Username);
+		if (verification != null)
+			throw new UserDuplicateKeyException("Username already exists!");
+
 		var person = await _personService.HandleCreatePerson(
-			new PersonViewModel(model.FullName,
-				model.Email,
-				model.Phone,
-				model.Document,
-				model.Type,
-				model.Address));
+			new PersonViewModel(model.Person.FullName,
+				model.Person.Email,
+				model.Person.Phone,
+				model.Person.Document,
+				model.Person.Type,
+				model.Person.Address));
+
 		var user = new User(
 			model.Username,
 			model.Password,
 			person.Id,
 			model.IdAccess);
+
 		var passwordHashed =
 			_passwordHashService.HashPassword(user.PasswordHash);
+
 		user.PasswordHash = passwordHashed;
+
 		await _userRepository.AddAsync(user);
 		await _userRepository.SaveChangesAsync();
 		await _logActivityService.CreateLog(ELogType.Success, EAction.Created,
 			ELogCode.CreateUser, user.Id, "User created sucessfully.");
+
 		return user;
 	}
 
@@ -59,7 +70,11 @@ public class UserService : IUserService {
 		return verifyPassword;
 	}
 
-	public async Task<User> HandleGetUser(string username) {
+	public async Task<User> HandleGetUserByUsername(string username) {
 		return await _userRepository.GetUser(username);
+	}
+
+	public async Task<User> HandleGetUserById(Guid id) {
+		return await _userRepository.GetByIdAsync(id);
 	}
 }

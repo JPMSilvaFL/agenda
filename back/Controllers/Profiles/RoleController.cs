@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AgendaApi.Controllers.Profiles;
 
+[ApiController]
 public class RoleController : ControllerBase {
 	private readonly IRoleService _roleService;
 

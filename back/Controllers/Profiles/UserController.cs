@@ -29,7 +29,7 @@ public class UserController : ControllerBase {
 				.Select(x => x.ErrorMessage)
 				.ToList()));
 
-		var result = await _userService.HandleCreateUser(model);
+		await _userService.HandleCreateUser(model);
 		return Ok("User created Successfully.");
 	}
 }

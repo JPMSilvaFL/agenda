@@ -9,25 +9,31 @@ namespace AgendaApi.Collections.Services.Profiles;
 
 public class EmployeeService : IEmployeeService {
 	private readonly IEmployeeRepository _employeeRepository;
-	private readonly IPersonService _personService;
+	private readonly IUserService _userService;
 	private readonly ILogActivityService _logActivityService;
 
 	public EmployeeService(IEmployeeRepository employeeRepository,
-		IPersonService personService, ILogActivityService logActivityService) {
+		IUserService userService, ILogActivityService logActivityService) {
 		_employeeRepository = employeeRepository;
-		_personService = personService;
+		_userService = userService;
 		_logActivityService = logActivityService;
 	}
 
 	public async Task<Employee> HandleCreateEmployee(
 		EmployeeViewModel model) {
-		var person = await _personService.HandleCreatePerson(model.Person);
-		var employee = new Employee(model.IdRole, person.Id);
+		var user = model.User == null
+			? await _userService.HandleGetUserById(model.IdUser.Value)
+			: await _userService.HandleCreateUser(model.User ??
+			                                      throw new ArgumentException(
+				                                      "Dados do usuário são obrigatórios para criação."));
+
+
+		var employee = new Employee(model.IdRole, user.Id);
 		await _employeeRepository.AddAsync(employee);
 		await _employeeRepository.SaveChangesAsync();
 		await _logActivityService.CreateLog(ELogType.Success, EAction.Created,
 			ELogCode.CreateEmployee, employee.Id,
-			$"Employee {person.FullName} created successfully.");
+			$"Employee created successfully.");
 		return employee;
 	}
 }

@@ -28,6 +28,14 @@ public class ExceptionMiddleware {
 			await context.Response.WriteAsync(
 				"An error occurred while attempting connection to database.");
 		}
+		catch (UserDuplicateKeyException) {
+			_logger.LogError("UserDuplicateKeyException");
+			context.Response.StatusCode = 409;
+			await CreateLogError(EAction.Get, ELogCode.ErrorGettingPurpose,
+				"Error registering user.");
+			await context.Response.WriteAsync(
+				"Username already exists! Try another username, please.");
+		}
 		catch (PurposeNullException) {
 			_logger.LogError("Get purpose failed.");
 			context.Response.StatusCode = 409;

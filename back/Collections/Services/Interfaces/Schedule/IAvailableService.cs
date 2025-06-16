@@ -11,4 +11,7 @@ public interface IAvailableService {
 
 	Task<List<QueryAvailableViewModel>> HandleSearchAvailable(
 		SearchAvailableViewModel model);
+
+	Task<Available>? HandleGetAvailableByEmployeeAndInitialTime(
+		Guid employee, DateTime initialTime);
 }

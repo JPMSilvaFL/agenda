@@ -11,15 +11,21 @@ namespace AgendaApi.Collections.Services.Profiles;
 public class CustomerService : ICustomerService {
 	private readonly ICustomerRepository _customerRepository;
 	private readonly ILogActivityService _logActivityService;
+	private readonly IPersonService _personService;
+	private readonly IUserService _userService;
 
 	public CustomerService(ICustomerRepository customerRepository,
-		ILogActivityService logActivityService) {
+		ILogActivityService logActivityService,
+		IPersonService personService) {
+		_personService = personService;
 		_customerRepository = customerRepository;
 		_logActivityService = logActivityService;
 	}
 
 	public async Task<Customer> HandleCreateCustomer(CustomerViewModel model) {
-		var customer = new Customer(model.IdPerson);
+		var person = await _personService.HandleCreatePerson(model.User.Person);
+		var user = await _userService.HandleCreateUser(model.User);
+		var customer = new Customer(user.Id);
 		await _customerRepository.AddAsync(customer);
 		await _customerRepository.SaveChangesAsync();
 		await _logActivityService.CreateLog(ELogType.Success, EAction.Created,

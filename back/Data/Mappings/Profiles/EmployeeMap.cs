@@ -24,16 +24,16 @@ public class EmployeeMap : IEntityTypeConfiguration<Employee> {
 			.HasConstraintName("FK_Employee_Role")
 			.OnDelete(DeleteBehavior.Restrict);
 
-		builder.Property(x => x.IdPerson)
-			.HasColumnName("Person")
+		builder.Property(x => x.IdUser)
+			.HasColumnName("User")
 			.HasColumnType("uniqueidentifier")
 			.IsRequired();
-		builder.HasIndex(x => x.IdPerson)
+		builder.HasIndex(x => x.IdUser)
 			.IsUnique();
-		builder.HasOne(x => x.FromPerson)
+		builder.HasOne(x => x.FromUser)
 			.WithOne()
-			.HasForeignKey<Employee>(x => x.IdPerson)
-			.HasConstraintName("FK_Employee_Person")
+			.HasForeignKey<Employee>(x => x.IdUser)
+			.HasConstraintName("FK_Employee_User")
 			.OnDelete(DeleteBehavior.Cascade);
 
 		builder.Property(x => x.CreatedAt)

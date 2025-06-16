@@ -27,7 +27,7 @@ public class TokenService : ITokenService {
 		if (!validateUser)
 			throw new InvalidUserException("Usuário Inválido.");
 
-		var user = await _userService.HandleGetUser(model.Username);
+		var user = await _userService.HandleGetUserByUsername(model.Username);
 
 		var userDb = await _context
 			.Users
