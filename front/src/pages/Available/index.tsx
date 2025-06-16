@@ -7,7 +7,7 @@ export function Available() {
     return (
         <>
             <div className="actionBar">
-                <CustomInput value={search} onChange={setSearch} id="Name" />
+                <CustomInput value={search} onChange={setSearch} id="Name"/>
             </div>
             <div>
 

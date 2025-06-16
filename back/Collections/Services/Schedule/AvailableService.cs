@@ -18,12 +18,14 @@ public class AvailableService : IAvailableService {
 		Available? available = null;
 		for (var x = model.InitialTime;
 		     x < model.FinalTime;
-		     x = x.AddMinutes(1)) {
+		     x = x.AddMinutes(5)) {
+			if (await _availableRepository.GetByEmployeeAndInitialTime(
+				    model.IdEmployee, x) != null)
+				throw new AvailableErrorException("Already alocated.");
 			available = new Available(model.IdEmployee, x);
 			await _availableRepository.AddAsync(available);
-			await _availableRepository.SaveChangesAsync();
 		}
-
+		await _availableRepository.SaveChangesAsync();
 		if (available == null)
 			throw new AvailableErrorException("Available is returning null");
 		return available;
@@ -33,11 +35,11 @@ public class AvailableService : IAvailableService {
 		Guid idScheduled) {
 		for (var x = model.InitialTime;
 		     x < model.FinalTime;
-		     x = x.AddMinutes(1)) {
+		     x = x.AddMinutes(5)) {
 			var available =
 				await _availableRepository.GetByEmployeeAndInitialTime(
 					model.IdEmployee, x);
-			if (available != null) available.IdScheduled = idScheduled;
+			if (available != null && available.IdScheduled == null) available.IdScheduled = idScheduled;
 		}
 
 		await _availableRepository.SaveChangesAsync();
@@ -50,5 +52,10 @@ public class AvailableService : IAvailableService {
 			await _availableRepository.SearchAvailable(model.Status, model.Skip,
 				model.Take);
 		return result;
+	}
+
+	public async Task<Available> HandleGetAvailable(AvailableViewModel model) {
+		var available = await _availableRepository.GetByEmployeeAndInitialTime(model.IdEmployee, model.InitialTime);
+		return available;
 	}
 }

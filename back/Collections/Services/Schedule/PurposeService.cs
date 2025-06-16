@@ -3,7 +3,6 @@ using AgendaApi.Collections.Repositories.Interfaces.Schedule;
 using AgendaApi.Collections.Services.Interfaces.Schedule;
 using AgendaApi.Collections.Services.Interfaces.Utilities;
 using AgendaApi.Collections.ViewModels.Schedule;
-using AgendaApi.Models.Log;
 using AgendaApi.Models.Schedule;
 
 namespace AgendaApi.Collections.Services.Schedule;

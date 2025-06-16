@@ -1,5 +1,4 @@
 ﻿using AgendaApi.Collections.Enum;
-using AgendaApi.Models.Log;
 
 namespace AgendaApi.Collections.Services.Interfaces.Utilities;
 

@@ -1,4 +1,4 @@
-﻿using AgendaApi.Models.Log;
+﻿using AgendaApi.Models.Utilities;
 
 namespace AgendaApi.Collections.Repositories.Interfaces.Utilities;
 

@@ -1,4 +1,4 @@
-﻿using AgendaApi.Models.Log;
+﻿using AgendaApi.Models.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

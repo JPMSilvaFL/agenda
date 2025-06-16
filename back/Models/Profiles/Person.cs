@@ -3,7 +3,7 @@
 namespace AgendaApi.Models.Profiles;
 
 public class Person {
-	public Guid Id { get; private set; }
+	public Guid Id { get; set; }
 	public bool Status { get; set; } = true;
 	[Length(3, 100)] public string FullName { get; set; } = string.Empty;
 	[Length(10, 100)] public string Email { get; set; } = string.Empty;

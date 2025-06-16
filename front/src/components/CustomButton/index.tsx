@@ -1,11 +1,11 @@
 import React from "react";
-import { Button, type ButtonProps } from "@mantine/core";
+import {Button, type ButtonProps} from "@mantine/core";
 
 type CustomButtonProps = {
-  children: React.ReactNode;
+    children: React.ReactNode;
 } & ButtonProps &
-  React.ButtonHTMLAttributes<HTMLButtonElement>;
+    React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export function CustomButton({ children, ...props }: CustomButtonProps) {
-  return <Button {...props}>{children}</Button>;
+export function CustomButton({children, ...props}: CustomButtonProps) {
+    return <Button {...props}>{children}</Button>;
 }

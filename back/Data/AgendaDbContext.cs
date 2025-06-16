@@ -1,9 +1,9 @@
 ﻿using AgendaApi.Data.Mappings.Profiles;
 using AgendaApi.Data.Mappings.Schedule;
 using AgendaApi.Data.Mappings.Utilities;
-using AgendaApi.Models.Log;
 using AgendaApi.Models.Profiles;
 using AgendaApi.Models.Schedule;
+using AgendaApi.Models.Utilities;
 using Microsoft.EntityFrameworkCore;
 
 namespace AgendaApi.Data;

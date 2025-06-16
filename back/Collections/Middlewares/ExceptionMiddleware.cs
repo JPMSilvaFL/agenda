@@ -1,7 +1,6 @@
 ﻿using AgendaApi.Collections.Enum;
 using AgendaApi.Collections.Exceptions;
 using AgendaApi.Collections.Services.Interfaces.Utilities;
-using AgendaApi.Models.Log;
 using Microsoft.Data.SqlClient;
 
 namespace AgendaApi.Collections.Middlewares;

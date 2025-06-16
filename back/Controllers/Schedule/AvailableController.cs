@@ -20,7 +20,6 @@ public class AvailableController : ControllerBase {
 	public async Task<IActionResult> CreateAvailable(
 		[FromBody] AvailableViewModel model) {
 		var result = await _availableService.HandleCreateAvailable(model);
-		Console.WriteLine(model.InitialTime);
 		return Ok(new ResultViewModel<Available>(result));
 	}
 

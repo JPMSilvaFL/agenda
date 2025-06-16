@@ -1,12 +1,9 @@
-﻿using AgendaApi.Collections.Exceptions;
 using AgendaApi.Collections.Services.Interfaces.Profiles;
-using AgendaApi.Collections.Services.Interfaces.Utilities;
 using AgendaApi.Collections.ViewModels.Profiles;
 using AgendaApi.Collections.ViewModels.Result;
 using AgendaApi.Models.Profiles;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 
 namespace AgendaApi.Controllers.Profiles;
 

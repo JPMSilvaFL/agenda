@@ -1,6 +1,6 @@
 ﻿using AgendaApi.Collections.Repositories.Interfaces.Utilities;
 using AgendaApi.Data;
-using AgendaApi.Models.Log;
+using AgendaApi.Models.Utilities;
 
 namespace AgendaApi.Collections.Repositories.Utilities;
 

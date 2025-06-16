@@ -17,7 +17,9 @@ using AgendaApi.Collections.Services.Profiles;
 using AgendaApi.Collections.Services.Schedule;
 using AgendaApi.Collections.Services.Utilities;
 using AgendaApi.Data;
+using AgendaApi.Models.Profiles;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -32,8 +34,13 @@ var app = builder.Build();
 LoadConfiguration(app);
 
 app.UseCors("MyCorsPolicy");
+if (app.Environment.IsDevelopment()) {
+	app.UseSwagger();
+	app.UseSwaggerUI();
+}
 app.UseMiddleware<ExceptionMiddleware>();
 app.MapControllers();
+CreateSuperUser(app);
 app.Run();
 
 void ConfigureMvc(WebApplicationBuilder builder) {
@@ -68,6 +75,8 @@ void ConfigureServices(WebApplicationBuilder builder) {
 					.AllowCredentials(); // Permite credenciais (cookies, autenticação)
 			});
 	});
+	builder.Services.AddEndpointsApiExplorer();
+	builder.Services.AddSwaggerGen();
 
 	builder.Services.AddDbContext<AgendaDbContext>(options =>
 		options.UseSqlServer(
@@ -90,6 +99,7 @@ void ConfigureServices(WebApplicationBuilder builder) {
 	builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 	builder.Services.AddScoped<IScheduledService, ScheduledService>();
 	builder.Services.AddScoped<ISecretaryService, SecretaryService>();
+	builder.Services.AddScoped<IVerificationService, VerificationService>();
 
 
 	builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
@@ -123,4 +133,46 @@ void ConfigureAuthentication(WebApplicationBuilder builder) {
 
 void LoadConfiguration(WebApplication app) {
 	Configuration.JwtKey = app.Configuration.GetValue<string>("JwtKey")!;
+}
+
+void CreateSuperUser(WebApplication app) {
+	using var scope = app.Services.CreateScope();
+	var context = scope.ServiceProvider.GetRequiredService<AgendaDbContext>();
+	var passwordHasher = new PasswordHasher<User>();
+	if (!context
+		    .Users
+		    .Include(x=>x.FromAccess)
+		    .Any(x=>x.FromAccess!.Name == "Admin")) {
+		var access = new Access {
+			Id = Guid.Parse("8d22b8b3-4c12-40fa-9b7a-73f6ce2a08a9"),
+			Name = "Admin",
+		};
+		var person = new Person {
+			Id= Guid.Parse("3db61c58-7f07-45a5-9aaf-70a73ac2e63a"),
+			FullName= "Sistema",
+			Email= "Sistema@sistema.com",
+			Phone= "64993140912",
+			Document = "01234567891",
+			Type= "J",
+			Address= "Rua 7, 103c"
+		};
+		var admin = new User {
+			Id = Guid.Parse("76207e5b-3fc5-4ad6-a7c0-c7bb7d1cfcae"),
+			IdAccess = access.Id,
+			IdPerson = person.Id,
+			Username = "Sistema.admin",
+			PasswordHash = "152369Sistema@"
+		};
+		admin.PasswordHash = passwordHasher.HashPassword(admin, admin.PasswordHash);
+		context.Accesses.Add(access);
+		context.Persons.Add(person);
+		context.Users.Add(admin);
+		context.SaveChanges();
+
+		Console.WriteLine("✅ Admin criado com sucesso!");
+	}
+	else
+	{
+		Console.WriteLine("ℹ️ Admin já existe.");
+	}
 }

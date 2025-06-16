@@ -6,15 +6,15 @@ import {Outlet} from "react-router-dom";
 import {useDisclosure} from "@mantine/hooks";
 
 export function MainLayout() {
-    const [opened, { toggle }] = useDisclosure();
+    const [opened, {toggle}] = useDisclosure();
     return (
         <AppShell
-            padding={{ base: 10, sm: 15, lg: "xl" }}
-            header={{ height: { base: 48, sm: 60, lg: 76 } }}
+            padding={{base: 10, sm: 15, lg: "xl"}}
+            header={{height: {base: 48, sm: 60, lg: 76}}}
             navbar={{
                 width: 120,
                 breakpoint: "sm",
-                collapsed: { mobile: !opened },
+                collapsed: {mobile: !opened},
             }}
         >
             <AppShell.Header className={styles.headerContainer}>
@@ -26,14 +26,14 @@ export function MainLayout() {
                     size="lg"
                 />
                 <div className={styles.userTray}>
-                    <UserTray />
+                    <UserTray/>
                 </div>
             </AppShell.Header>
             <AppShell.Navbar className={styles.navBar}>
-                <Navbar />
+                <Navbar/>
             </AppShell.Navbar>
             <AppShell.Main className={styles.mainContainer}>
-                <Outlet />
+                <Outlet/>
             </AppShell.Main>
         </AppShell>
     )

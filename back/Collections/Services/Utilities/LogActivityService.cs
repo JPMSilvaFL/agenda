@@ -1,7 +1,7 @@
 ﻿using AgendaApi.Collections.Enum;
 using AgendaApi.Collections.Repositories.Interfaces.Utilities;
 using AgendaApi.Collections.Services.Interfaces.Utilities;
-using AgendaApi.Models.Log;
+using AgendaApi.Models.Utilities;
 
 namespace AgendaApi.Collections.Services.Utilities;
 
@@ -24,7 +24,7 @@ public class LogActivityService : ILogActivityService {
 		var userId =
 			Guid.Parse(userIdClaim != null
 				? userIdClaim.Value
-				: "0868DBC1-5684-40B0-A74D-5EE22EA80974");
+				: "76207e5b-3fc5-4ad6-a7c0-c7bb7d1cfcae");
 		if (userId == Guid.Empty)
 			throw new Exception("Usuário não autenticado.");
 		var create = new LogActivity(userId, type, action, code, objectId,

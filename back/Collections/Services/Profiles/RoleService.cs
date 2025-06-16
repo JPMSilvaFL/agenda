@@ -3,7 +3,6 @@ using AgendaApi.Collections.Repositories.Interfaces.Profiles;
 using AgendaApi.Collections.Services.Interfaces.Profiles;
 using AgendaApi.Collections.Services.Interfaces.Utilities;
 using AgendaApi.Collections.ViewModels.Profiles;
-using AgendaApi.Models.Log;
 using AgendaApi.Models.Profiles;
 
 namespace AgendaApi.Collections.Services.Profiles;

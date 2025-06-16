@@ -29,4 +29,9 @@ public class SecretaryService : ISecretaryService {
 			secretary.Id, "Created Secretary successfully.");
 		return secretary;
 	}
+
+	public async Task<Secretary> HandleGetSecretaryById(Guid id) {
+		var secretary = await _secretaryRepository.GetByIdAsync(id);
+		return secretary;
+	}
 }

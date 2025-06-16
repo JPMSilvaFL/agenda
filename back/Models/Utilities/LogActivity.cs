@@ -1,7 +1,7 @@
 ﻿using AgendaApi.Collections.Enum;
 using AgendaApi.Models.Profiles;
 
-namespace AgendaApi.Models.Log;
+namespace AgendaApi.Models.Utilities;
 
 public class LogActivity {
 	public int Id { get; set; }
