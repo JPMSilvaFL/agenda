@@ -1,4 +1,5 @@
 ﻿using AgendaApi.Collections.Enum;
+using AgendaApi.Collections.Exceptions;
 using AgendaApi.Collections.Repositories.Interfaces.Profiles;
 using AgendaApi.Collections.Services.Interfaces.Profiles;
 using AgendaApi.Collections.Services.Interfaces.Utilities;
@@ -21,12 +22,16 @@ public class EmployeeService : IEmployeeService {
 
 	public async Task<Employee> HandleCreateEmployee(
 		EmployeeViewModel model) {
+		if (model.IdUser == null && model.User == null)
+			throw new ArgumentException("Use all the fields.");
 		var user = model.User == null
 			? await _userService.HandleGetUserById(model.IdUser.Value)
 			: await _userService.HandleCreateUser(model.User ??
 			                                      throw new ArgumentException(
 				                                      "Dados do usuário são obrigatórios para criação."));
 
+		if (user == null)
+			throw new UserNullException("User has a null value.");
 
 		var employee = new Employee(model.IdRole, user.Id);
 		await _employeeRepository.AddAsync(employee);

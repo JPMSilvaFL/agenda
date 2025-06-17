@@ -64,17 +64,19 @@ public class UserService : IUserService {
 
 	public async Task<bool> HandleAuthenticateUser(LoginViewModel model) {
 		var user = await _userRepository.GetUser(model.Username);
+		if (user == null)
+			return false;
 		var verifyPassword =
 			_passwordHashService.VerifyPassword(user.PasswordHash,
 				model.Password, user);
 		return verifyPassword;
 	}
 
-	public async Task<User> HandleGetUserByUsername(string username) {
+	public async Task<User?> HandleGetUserByUsername(string username) {
 		return await _userRepository.GetUser(username);
 	}
 
-	public async Task<User> HandleGetUserById(Guid id) {
+	public async Task<User?> HandleGetUserById(Guid id) {
 		return await _userRepository.GetByIdAsync(id);
 	}
 }

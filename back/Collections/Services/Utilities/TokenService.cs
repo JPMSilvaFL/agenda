@@ -28,6 +28,8 @@ public class TokenService : ITokenService {
 			throw new InvalidUserException("Usuário Inválido.");
 
 		var user = await _userService.HandleGetUserByUsername(model.Username);
+		if (user == null)
+			throw new UserNullException("User has a null value.");
 
 		var userDb = await _context
 			.Users

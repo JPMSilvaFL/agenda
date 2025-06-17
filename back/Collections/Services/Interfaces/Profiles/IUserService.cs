@@ -7,6 +7,6 @@ public interface IUserService {
 	Task<IList<User>> HandleListUser();
 	Task<User> HandleCreateUser(UserViewModel model);
 	Task<bool> HandleAuthenticateUser(LoginViewModel model);
-	Task<User> HandleGetUserByUsername(string username);
-	Task<User> HandleGetUserById(Guid id);
+	Task<User?> HandleGetUserByUsername(string username);
+	Task<User?> HandleGetUserById(Guid id);
 }

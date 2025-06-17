@@ -4,6 +4,6 @@ using AgendaApi.Models.Schedule;
 namespace AgendaApi.Collections.Services.Interfaces.Utilities;
 
 public interface IVerificationService {
-	Task<Scheduled>? HandleVerificationScheduledIntegrity(
+	Task<Scheduled?> HandleVerificationScheduledIntegrity(
 		ScheduledViewModel model);
 }

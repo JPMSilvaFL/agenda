@@ -6,8 +6,8 @@ public class Purpose {
 	public Guid Id { get; set; }
 	public Guid IdRole { get; set; }
 	public Role? FromRole { get; set; }
-	public string Name { get; set; }
-	public string Description { get; set; }
+	public string Name { get; set; } = null!;
+	public string Description { get; set; } = null!;
 	public float Value { get; set; }
 	public int DurationInMinutes { get; set; }
 	public DateTime CreatedAt { get; set; }

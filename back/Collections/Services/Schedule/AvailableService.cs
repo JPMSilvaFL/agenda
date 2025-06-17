@@ -56,11 +56,11 @@ public class AvailableService : IAvailableService {
 		return result;
 	}
 
-	public async Task<Available>? HandleGetAvailableByEmployeeAndInitialTime(
+	public async Task<Available?> HandleGetAvailableByEmployeeAndInitialTime(
 		Guid employee, DateTime initialTime) {
 		var available =
 			await _availableRepository.GetByEmployeeAndInitialTime(
 				employee, initialTime);
-		return available;
+		return available!;
 	}
 }

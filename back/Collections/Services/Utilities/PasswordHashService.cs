@@ -13,7 +13,7 @@ public class PasswordHashService : IPasswordHashService {
 
 	public string HashPassword(string password) {
 		var hasher = new PasswordHasher<User>();
-		var result = hasher.HashPassword(null, password);
+		var result = hasher.HashPassword(null!, password);
 		return result;
 	}
 }

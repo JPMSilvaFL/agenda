@@ -16,14 +16,16 @@ public class CustomerService : ICustomerService {
 
 	public CustomerService(ICustomerRepository customerRepository,
 		ILogActivityService logActivityService,
-		IPersonService personService) {
+		IPersonService personService,
+		IUserService userService) {
 		_personService = personService;
 		_customerRepository = customerRepository;
 		_logActivityService = logActivityService;
+		_userService = userService;
 	}
 
 	public async Task<Customer> HandleCreateCustomer(CustomerViewModel model) {
-		var person = await _personService.HandleCreatePerson(model.User.Person);
+		await _personService.HandleCreatePerson(model.User.Person);
 		var user = await _userService.HandleCreateUser(model.User);
 		var customer = new Customer(user.Id);
 		await _customerRepository.AddAsync(customer);

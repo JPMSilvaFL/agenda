@@ -14,7 +14,7 @@ public class UserRepository : Repository<User>, IUserRepository {
 		_context = context;
 	}
 
-	public async Task<User> GetUser(string username) {
+	public async Task<User?> GetUser(string username) {
 		var user = await _context
 			.Users
 			.FirstOrDefaultAsync(x => x.Username == username);

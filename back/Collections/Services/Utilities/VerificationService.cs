@@ -20,7 +20,7 @@ public class VerificationService : IVerificationService {
 		_secretaryService = secretaryService;
 	}
 
-	public async Task<Scheduled>? HandleVerificationScheduledIntegrity(
+	public async Task<Scheduled?> HandleVerificationScheduledIntegrity(
 		ScheduledViewModel model) {
 		var secretary =
 			await _secretaryService.HandleGetSecretaryById(model.IdSecretary);

@@ -36,8 +36,8 @@ public class PurposeService : IPurposeService {
 		return result;
 	}
 
-	public async Task<Purpose> HandleGetPurposeById(Guid idPurpose) {
+	public async Task<Purpose?> HandleGetPurposeById(Guid idPurpose) {
 		var purpose = await _purposeRepository.GetPurposeById(idPurpose);
-		return purpose;
+		return purpose!;
 	}
 }
