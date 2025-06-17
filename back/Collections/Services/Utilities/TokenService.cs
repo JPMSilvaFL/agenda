@@ -7,7 +7,6 @@ using AgendaApi.Collections.Services.Interfaces.Utilities;
 using AgendaApi.Collections.ViewModels.Profiles;
 using AgendaApi.Collections.ViewModels.Result;
 using AgendaApi.Data;
-using AgendaApi.Models.Profiles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 

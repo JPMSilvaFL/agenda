@@ -37,7 +37,7 @@ public class AvailableRepository : Repository<Available>, IAvailableRepository {
 		DateTime initialTime) {
 		var available = await _context
 			.Availables
-			.FirstAsync(x =>
+			.FirstOrDefaultAsync(x =>
 				x.IdEmployee == employeeId && x.InitialTime == initialTime);
 
 		return available;

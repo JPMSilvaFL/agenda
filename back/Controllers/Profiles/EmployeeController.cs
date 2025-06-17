@@ -1,6 +1,7 @@
 ﻿using AgendaApi.Collections.Services.Interfaces.Profiles;
 using AgendaApi.Collections.ViewModels.Profiles;
 using AgendaApi.Collections.ViewModels.Result;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AgendaApi.Controllers.Profiles;
@@ -13,6 +14,7 @@ public class EmployeeController : ControllerBase {
 	}
 
 	[HttpPost("api/v1/employee")]
+	[Authorize(Roles = "Admin")]
 	public async Task<IActionResult> CreateEmployee(
 		[FromBody] EmployeeViewModel model) {
 		await _employeeService.HandleCreateEmployee(model);

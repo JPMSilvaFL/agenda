@@ -20,14 +20,14 @@ public class PersonService : IPersonService {
 	}
 
 	public async Task<Person> HandleCreatePerson(PersonViewModel model) {
-		var person = new Person(model.FullName, model.Email, model.Document,
-			model.Phone, model.Address, model.Type);
-		if (await _personRepository.ConfirmUniqueKey(person.Document))
+		if (await _personRepository.ConfirmUniqueKey(model.Document))
 			throw new DuplicatePersonException(
 				"A person with the same document already exists.");
-		if (await _personRepository.ConfirmUniqueKey(person.Email))
+		if (await _personRepository.ConfirmUniqueKey(model.Email))
 			throw new DuplicatePersonException(
 				"A person with the same email already exists.");
+		var person = new Person(model.FullName, model.Email, model.Document,
+			model.Phone, model.Address, model.Type);
 		await _personRepository.AddAsync(person);
 		await _personRepository.SaveChangesAsync();
 

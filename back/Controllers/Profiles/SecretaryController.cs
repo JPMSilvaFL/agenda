@@ -1,5 +1,6 @@
 ﻿using AgendaApi.Collections.Services.Interfaces.Profiles;
 using AgendaApi.Collections.ViewModels.Profiles;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AgendaApi.Controllers.Profiles;
@@ -13,6 +14,7 @@ public class SecretaryController : ControllerBase {
 	}
 
 	[HttpPost("api/v1/secretary")]
+	[Authorize(Roles = "Admin")]
 	public async Task<IActionResult> CreateSecretary(
 		[FromBody] SecretaryViewModel model) {
 		await _secretaryService.HandleCreateSecretary(model);

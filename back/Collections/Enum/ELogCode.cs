@@ -15,5 +15,9 @@ public enum ELogCode {
 	// Errors
 	DuplicatePersonKeys = 1001,
 	AvailableError = 1002,
-	ErrorGettingPurpose = 1003
+	ErrorGettingPurpose = 1003,
+	InvalidUserError = 1004,
+	ScheduledError = 1005,
+	ScheduledNullError = 1006,
+	SecretaryNullError = 1007
 }

@@ -36,13 +36,53 @@ public class ExceptionMiddleware {
 			await context.Response.WriteAsync(
 				"Username already exists! Try another username, please.");
 		}
-		catch (PurposeNullException) {
+		catch (UserNullException e) {
+			_logger.LogError("UserNullException");
+			context.Response.StatusCode = 409;
+			await CreateLogError(EAction.Created, ELogCode.InvalidUserError,
+				e.Message);
+			await context.Response.WriteAsync(
+				"User is returning null, verify and try again please.");
+		}
+		catch (PurposeNullException e) {
 			_logger.LogError("Get purpose failed.");
 			context.Response.StatusCode = 409;
 			await CreateLogError(EAction.Get, ELogCode.ErrorGettingPurpose,
-				"Error getting purpose.");
+				e.Message);
 			await context.Response.WriteAsync(
 				"Get purpose failed, please try again. If the error persist contact the system admin.");
+		}
+		catch (InvalidUserException e) {
+			_logger.LogError("InvalidUserException");
+			context.Response.StatusCode = 403;
+			await CreateLogError(EAction.Created, ELogCode.InvalidUserError,
+				e.Message);
+			await context.Response.WriteAsync(
+				"Invalid user, please try again. If the error persist contact the system admin.");
+		}
+		catch (ScheduledException e) {
+			_logger.LogError("ScheduledException");
+			context.Response.StatusCode = 409;
+			await CreateLogError(EAction.Created, ELogCode.ScheduledError,
+				e.Message);
+			await context.Response.WriteAsync(
+				"Scheduled error, please try again.");
+		}
+		catch (ScheduledNullException e) {
+			_logger.LogError("ScheduledNullException.");
+			context.Response.StatusCode = 409;
+			await CreateLogError(EAction.Created, ELogCode.ScheduledNullError,
+				e.Message);
+			await context.Response.WriteAsync(
+				"Scheduled is returning null, verify and try again please.");
+		}
+		catch (SecretaryNullException e) {
+			_logger.LogError("SecretaryNullException.");
+			context.Response.StatusCode = 409;
+			await CreateLogError(EAction.Created, ELogCode.SecretaryNullError,
+				e.Message);
+			await context.Response.WriteAsync(
+				"Secretary is returning null, verify and try again please.");
 		}
 		catch (AvailableErrorException e) {
 			_logger.LogError("Create Available failed.");

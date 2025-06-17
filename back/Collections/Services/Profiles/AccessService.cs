@@ -1,6 +1,5 @@
 ﻿using AgendaApi.Collections.Enum;
 using AgendaApi.Collections.Repositories.Interfaces.Profiles;
-using AgendaApi.Collections.Services.Interfaces;
 using AgendaApi.Collections.Services.Interfaces.Profiles;
 using AgendaApi.Collections.Services.Interfaces.Utilities;
 using AgendaApi.Collections.ViewModels.Profiles;

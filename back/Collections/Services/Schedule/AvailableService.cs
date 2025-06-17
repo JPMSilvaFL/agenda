@@ -19,10 +19,12 @@ public class AvailableService : IAvailableService {
 		for (var x = model.InitialTime;
 		     x < model.FinalTime;
 		     x = x.AddMinutes(5)) {
-			if (await _availableRepository.GetByEmployeeAndInitialTime(
-				    model.IdEmployee, x) != null)
-				throw new AvailableErrorException("Already alocated.");
 			available = new Available(model.IdEmployee, x);
+			var confirm =
+				await _availableRepository.GetByEmployeeAndInitialTime(
+					model.IdEmployee, x);
+			if (confirm != null)
+				throw new AvailableErrorException("Already alocated.");
 			await _availableRepository.AddAsync(available);
 		}
 
