@@ -1,6 +1,8 @@
-﻿using AgendaApi.Collections.Exceptions;
+﻿using AgendaApi.Collections.Enum;
+using AgendaApi.Collections.Exceptions;
 using AgendaApi.Collections.Repositories.Interfaces.Schedule;
 using AgendaApi.Collections.Services.Interfaces.Schedule;
+using AgendaApi.Collections.Services.Interfaces.Utilities;
 using AgendaApi.Collections.ViewModels.Schedule;
 using AgendaApi.Models.Schedule;
 
@@ -8,9 +10,16 @@ namespace AgendaApi.Collections.Services.Schedule;
 
 public class AvailableService : IAvailableService {
 	private readonly IAvailableRepository _availableRepository;
+	private readonly ILogActivityService _logActivityService;
+	private readonly IHttpContextAccessor _httpContextAccessor;
 
-	public AvailableService(IAvailableRepository availableRepository) {
+
+	public AvailableService(IAvailableRepository availableRepository,
+		ILogActivityService logActivityService,
+		IHttpContextAccessor httpContextAccessor) {
 		_availableRepository = availableRepository;
+		_logActivityService = logActivityService;
+		_httpContextAccessor = httpContextAccessor;
 	}
 
 	public async Task<Available>
@@ -50,11 +59,15 @@ public class AvailableService : IAvailableService {
 		return true;
 	}
 
-	public async Task<List<QueryAvailableViewModel>> HandleSearchAvailable(
+	public async Task<List<QueryAvailableViewModel>?> HandleSearchAvailable(
 		SearchAvailableViewModel model) {
+		var userIdClaim =
+			_httpContextAccessor.HttpContext?.User.FindFirst("UserId");
 		var result =
-			await _availableRepository.SearchAvailable(model.Status, model.Skip,
-				model.Take);
+			await _availableRepository.SearchAvailable(model);
+		await _logActivityService.CreateLog(ELogType.Success, EAction.Get,
+			ELogCode.SearchAvailable, Guid.Empty,
+			"Success getting available list" + userIdClaim);
 		return result;
 	}
 

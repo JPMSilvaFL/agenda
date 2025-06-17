@@ -9,7 +9,7 @@ public interface IAvailableService {
 	Task<bool>
 		HandleUpdateAvailable(AvailableViewModel model, Guid idScheduled);
 
-	Task<List<QueryAvailableViewModel>> HandleSearchAvailable(
+	Task<List<QueryAvailableViewModel>?> HandleSearchAvailable(
 		SearchAvailableViewModel model);
 
 	Task<Available?> HandleGetAvailableByEmployeeAndInitialTime(

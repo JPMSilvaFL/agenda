@@ -13,23 +13,22 @@ public class AvailableRepository : Repository<Available>, IAvailableRepository {
 		_context = context;
 	}
 
-	public async Task<List<QueryAvailableViewModel>> SearchAvailable(
-		char status, int skip, int take) {
+	public async Task<List<QueryAvailableViewModel>?> SearchAvailable(
+		SearchAvailableViewModel model) {
 		var result = _context.Availables.AsQueryable();
-		if (status is 'A' or 'F' or 'C')
-			result = result.Where(a => a.Status == status);
 
 		return await result
 			.Include(a => a.FromEmployee)
 			.ThenInclude(x => x!.FromUser)
 			.ThenInclude(x => x!.FromPerson)
+			.Where(x => x.Status == 'A')
 			.Select(x => new QueryAvailableViewModel(
 				x.FromEmployee!.FromUser!.FromPerson!.FullName,
 				x.InitialTime,
 				x.Status))
 			.AsNoTracking()
-			.Skip(skip)
-			.Take(take)
+			.Skip(model.Skip)
+			.Take(model.Take)
 			.ToListAsync();
 	}
 

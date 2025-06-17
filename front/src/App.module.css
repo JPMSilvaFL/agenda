@@ -1,32 +1,31 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .headerContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .userTray {
-    display: flex;
-    margin-left: auto;
-    padding-right: 1rem;
+  display: flex;
+  margin-left: auto;
+  padding-right: 1rem;
 }
 
 .mainContainer {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .navBar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: fit-content;
-    padding: 1rem 1rem;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  padding: 1rem 1rem;
 }

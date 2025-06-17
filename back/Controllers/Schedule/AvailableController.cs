@@ -23,9 +23,10 @@ public class AvailableController : ControllerBase {
 		return Ok(new ResultViewModel<Available>(result));
 	}
 
-	[HttpGet("api/v1/available")]
+	[HttpPost("api/v1/available/list")]
+	[Authorize(Roles = "Admin")]
 	public async Task<IActionResult> SearchAvailables(
-		SearchAvailableViewModel model) {
+		[FromBody] SearchAvailableViewModel model) {
 		var result = await _availableService.HandleSearchAvailable(model);
 		return Ok(new ResultViewModel<List<QueryAvailableViewModel>>(result));
 	}
