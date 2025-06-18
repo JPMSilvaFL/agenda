@@ -2,11 +2,29 @@
 import styles from "../../App.module.css";
 import { UserTray } from "../../components/UserTray";
 import { Navbar } from "../../components/Menu";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useDisclosure } from "@mantine/hooks";
+import { useContext, useEffect } from "react";
+import { GlobalContext } from "../../store/GlobalContext";
+import axios from "axios";
 
 export function MainLayout() {
   const [opened, { toggle }] = useDisclosure();
+  const navigate = useNavigate();
+
+  const context = useContext(GlobalContext);
+  if (!context) throw new Error("Context outside of provider");
+  const { authorization } = context;
+  useEffect(() => {
+    axios
+      .post("http://localhost:5184/api/v1/login/validatetoken", {
+        token: authorization,
+      })
+      .then((resp) => {
+        var confirm = resp.data;
+        if (confirm == false) navigate("login");
+      });
+  });
   return (
     <AppShell
       padding={{ base: 10, sm: 15, lg: "xl" }}

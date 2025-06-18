@@ -1,7 +1,6 @@
 ﻿import { CustomInput } from "../../components/CustomInput";
 import { DateTimePicker } from "@mantine/dates";
 import { useContext, useState } from "react";
-import "react-calendar/dist/Calendar.css";
 import styles from "./styles.module.css";
 import { CustomButton } from "../../components/CustomButton";
 import axios from "axios";
@@ -17,23 +16,42 @@ type resultList = result | result;
 export function Available() {
   const [search, setSearch] = useState("");
   const [result, setResult] = useState<resultList>();
-  var { authentication } = useContext(GlobalContext);
-  
+  const { authorization } = useContext(GlobalContext);
 
-  axios.post("http://localhost:5184", {
-    headers: {
-      authorization: "Bearer " + {context.authentication},
-    },
-  });
+  function enviarFormulario(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    axios
+      .post(
+        "http://localhost:5184/api/v1/available/list",
+        {
+          Name: "",
+          Initial: "2025-06-18T08:00:00.00Z",
+          Final: "2025-06-18T18:00:00.00Z",
+          Skip: 0,
+          Take: 1000,
+        },
+        {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlNpc3RlbWEuYWRtaW4iLCJVc2VySWQiOiI3NjIwN2U1Yi0zZmM1LTRhZDYtYTdjMC1jN2JiN2QxY2ZjYWUiLCJBY2Nlc3NJZCI6IjhkMjJiOGIzLTRjMTItNDBmYS05YjdhLTczZjZjZTJhMDhhOSIsInJvbGUiOiJBZG1pbiIsIm5iZiI6MTc1MDI0NzAzNCwiZXhwIjoxNzUwMjY4NjM0LCJpYXQiOjE3NTAyNDcwMzR9.vomJC79fruOGxM1ETJ56j30YElmCe_ANZxuG1PJYXUY`,
+          },
+        },
+      )
+      .then((response) => console.log(response.data))
+      .catch((error) => console.error(error));
+  }
+
+  function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+  }
 
   return (
     <>
       <div>
-        <form className={styles.actionBar}>
+        <form className={styles.actionBar} onSubmit={enviarFormulario}>
           <CustomInput value={search} onChange={setSearch} id="Name" />
           <DateTimePicker />
           <DateTimePicker />
-          <CustomButton>Consultar</CustomButton>
+          <CustomButton type="submit">Consultar</CustomButton>
         </form>
       </div>
       <div className={styles.queryView}>

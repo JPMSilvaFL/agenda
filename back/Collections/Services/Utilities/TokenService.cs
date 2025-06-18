@@ -57,4 +57,25 @@ public class TokenService : ITokenService {
 		var tokenGerado = tokenHandler.WriteToken(token);
 		return new JwtViewModel(tokenGerado);
 	}
+
+	public bool ValidateToken(string token) {
+		var tokenHandler = new JwtSecurityTokenHandler();
+		try {
+			tokenHandler.ValidateToken(token, new TokenValidationParameters {
+				ValidateIssuerSigningKey = true,
+				IssuerSigningKey =
+					new SymmetricSecurityKey(
+						Encoding.ASCII.GetBytes(Configuration.JwtKey)),
+				ValidateIssuer = false,
+				ValidateAudience = false,
+				ClockSkew =
+					TimeSpan
+						.Zero
+			}, out _);
+			return true;
+		}
+		catch {
+			return false;
+		}
+	}
 }

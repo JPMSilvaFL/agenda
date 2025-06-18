@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 type value = {
-  authentication: JsonWebKey | null;
-  setAuthentication: React.Dispatch<React.SetStateAction<JsonWebKey | null>>;
+  authorization: JsonWebKey | null;
+  setAuthorization: React.Dispatch<React.SetStateAction<JsonWebKey | null>>;
 };
 
 type GlobalStorageProps = {
@@ -12,10 +12,10 @@ type GlobalStorageProps = {
 export const GlobalContext = React.createContext<value | null>(null);
 
 export const GlobalStorage = ({ children }: GlobalStorageProps) => {
-  const [authentication, setAuthentication] = useState<JsonWebKey | null>(null);
+  const [authorization, setAuthorization] = useState<JsonWebKey | null>(null);
 
   return (
-    <GlobalContext.Provider value={{ authentication, setAuthentication }}>
+    <GlobalContext.Provider value={{ authorization, setAuthorization }}>
       {children}
     </GlobalContext.Provider>
   );

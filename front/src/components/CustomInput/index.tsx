@@ -1,4 +1,4 @@
-import { Input, type InputProps } from "@mantine/core";
+import { Input, type CssVariable, type InputProps } from "@mantine/core";
 
 type CustomInputProps = {
   label?: string;
@@ -22,11 +22,6 @@ export function CustomInput({
   return (
     <Input.Wrapper label={label} description={description} error={error}>
       <Input
-        styles={{
-          input: {
-            padding: ".5rem",
-          },
-        }}
         onChange={(e) => onChange(e.target.value)}
         value={value}
         {...props}
