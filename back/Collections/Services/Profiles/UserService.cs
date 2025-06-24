@@ -79,4 +79,13 @@ public class UserService : IUserService {
 	public async Task<User?> HandleGetUserById(Guid id) {
 		return await _userRepository.GetByIdAsync(id);
 	}
+
+	public async Task HandleChangePassword(
+		ChangePasswordByUsernameViewModel model) {
+		var user = await _userRepository.GetUser(model.Username);
+		if (user == null)
+			throw new UserNullException("User not found!");
+		user.PasswordHash = _passwordHashService.HashPassword(model.Password);
+		await _userRepository.SaveChangesAsync();
+	}
 }

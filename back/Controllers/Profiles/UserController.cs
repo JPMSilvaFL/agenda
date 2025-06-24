@@ -24,12 +24,19 @@ public class UserController : ControllerBase {
 	public async Task<IActionResult>
 		CreateUser([FromBody] UserViewModel model) {
 		if (!ModelState.IsValid)
-			return BadRequest(new ResultViewModel<Customer>(ModelState.Values
+			return Conflict(new ResultViewModel<Customer>(ModelState.Values
 				.SelectMany(x => x.Errors)
 				.Select(x => x.ErrorMessage)
 				.ToList()));
 
 		await _userService.HandleCreateUser(model);
 		return Ok("User created Successfully.");
+	}
+
+	[HttpPost("api/v1/user/changepassword")]
+	public async Task<IActionResult> ChangePasswordByUsername(
+		[FromBody] ChangePasswordByUsernameViewModel model) {
+		await _userService.HandleChangePassword(model);
+		return Ok("Password changed successfully.");
 	}
 }

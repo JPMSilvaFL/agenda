@@ -7,6 +7,8 @@ import { CustomModal } from "../../components/CustomModal";
 import { GlobalContext } from "../../store/GlobalContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ForgotPassword } from "../../components/Modals/ForgotPassword";
+import { RegisterUser } from "../../components/Modals/RegisterUser";
 
 export function Login() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -16,15 +18,12 @@ export function Login() {
 
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
-
-  const [userForgot, setUserForgot] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [errorLogin, setErrorLogin] = useState("");
 
   const context = useContext(GlobalContext);
 
   if (!context) throw new Error("Context outside of provider");
-  const { authorization, setAuthorization } = context;
+  const { setAuthorization } = context;
 
   function handleLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -36,14 +35,12 @@ export function Login() {
       })
       .then((response) => setAuthorization(response.data.authorization))
       .then(() => {
-        if (authorization != null && authorization != undefined) navigate("/");
+        navigate("/");
+      })
+      .catch(() => {
+        setErrorLogin("Invalid username or password");
       });
   }
-
-  useEffect(() => {
-    console.log(authorization);
-  }, [authorization]);
-
   return (
     <>
       <div className={styles.container}>
@@ -77,6 +74,7 @@ export function Login() {
                 },
               }}
             />
+            {errorLogin && <p className={styles.errorLogin}>{errorLogin}</p>}
             <CustomButton type="submit">Login</CustomButton>
           </form>
 
@@ -86,27 +84,7 @@ export function Login() {
             centered={true}
             withCloseButton={false}
           >
-            <form method="post" className={styles.login}>
-              <CustomInput
-                label="User"
-                value={userForgot}
-                onChange={setUserForgot}
-                id="userForgot"
-              />
-              <CustomInput
-                label="New Password"
-                value={newPassword}
-                onChange={setNewPassword}
-                id="newPassword"
-              />
-              <CustomInput
-                label="Confirm New Password"
-                value={confirmNewPassword}
-                onChange={setConfirmNewPassword}
-                id="confirmNewPassword"
-              />
-              <CustomButton>Send</CustomButton>
-            </form>
+            <ForgotPassword />
           </CustomModal>
           <p>
             Forgot your password?<a onClick={open}> Recover here</a>
@@ -118,7 +96,9 @@ export function Login() {
             centered={true}
             withCloseButton={false}
             title="Register"
-          ></CustomModal>
+          >
+            <RegisterUser />
+          </CustomModal>
           <p>
             Has a account? <a onClick={openRegister}> Sign in here</a>
           </p>

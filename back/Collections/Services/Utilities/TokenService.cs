@@ -1,6 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using AgendaApi.Collections.Enum;
 using AgendaApi.Collections.Exceptions;
 using AgendaApi.Collections.Services.Interfaces.Profiles;
 using AgendaApi.Collections.Services.Interfaces.Utilities;
@@ -15,10 +16,13 @@ namespace AgendaApi.Collections.Services.Utilities;
 public class TokenService : ITokenService {
 	private readonly AgendaDbContext _context;
 	private readonly IUserService _userService;
+	private readonly ILogActivityService _logActivityService;
 
-	public TokenService(AgendaDbContext context, IUserService userService) {
+	public TokenService(AgendaDbContext context, IUserService userService,
+		ILogActivityService logActivityService) {
 		_context = context;
 		_userService = userService;
+		_logActivityService = logActivityService;
 	}
 
 	public async Task<JwtViewModel> GenerateToken(LoginViewModel model) {
@@ -55,6 +59,8 @@ public class TokenService : ITokenService {
 		};
 		var token = tokenHandler.CreateToken(tokenDescriptor);
 		var tokenGerado = tokenHandler.WriteToken(token);
+		await _logActivityService.CreateLog(ELogType.Success, EAction.Created,
+			ELogCode.Login, userDb.Id, "User logged successfully.");
 		return new JwtViewModel(tokenGerado);
 	}
 
@@ -67,10 +73,7 @@ public class TokenService : ITokenService {
 					new SymmetricSecurityKey(
 						Encoding.ASCII.GetBytes(Configuration.JwtKey)),
 				ValidateIssuer = false,
-				ValidateAudience = false,
-				ClockSkew =
-					TimeSpan
-						.Zero
+				ValidateAudience = false
 			}, out _);
 			return true;
 		}

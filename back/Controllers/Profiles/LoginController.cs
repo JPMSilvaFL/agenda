@@ -2,6 +2,7 @@
 using AgendaApi.Collections.Services.Interfaces.Utilities;
 using AgendaApi.Collections.ViewModels.Profiles;
 using AgendaApi.Collections.ViewModels.Result;
+using AgendaApi.Collections.ViewModels.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,8 +28,8 @@ public class LoginController : ControllerBase {
 
 	[HttpPost("api/v1/login/validatetoken")]
 	public IActionResult ValidateToken(
-		[FromBody] string token) {
-		var confirm = _tokenService.ValidateToken(token);
+		[FromBody] ValidateTokenViewModel model) {
+		var confirm = _tokenService.ValidateToken(model.Token);
 		return Ok(confirm);
 	}
 }

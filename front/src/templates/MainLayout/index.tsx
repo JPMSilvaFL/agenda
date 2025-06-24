@@ -18,7 +18,7 @@ export function MainLayout() {
   useEffect(() => {
     axios
       .post("http://localhost:5184/api/v1/login/validatetoken", {
-        token: authorization,
+        Token: authorization,
       })
       .then((resp) => {
         var confirm = resp.data;

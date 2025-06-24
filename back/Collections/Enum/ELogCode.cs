@@ -12,6 +12,7 @@ public enum ELogCode {
 	CreateSchedule = 8,
 	CreateSecretary = 9,
 	SearchAvailable = 10,
+	Login = 11,
 
 	// Errors
 	DuplicatePersonKeys = 1001,
